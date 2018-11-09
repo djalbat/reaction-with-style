@@ -29,9 +29,9 @@ const { ReactDOM } = reaction,
 
 const View = require('./view');
 
-renderStyles();
-
 const bodyDOMElement = document.querySelector('body');
+
+renderStyles();
 
 ReactDOM.render(
 
@@ -42,10 +42,36 @@ ReactDOM.render(
 );
 ```
 
-Note that you must call `renderStyles()` *after* importing the view but *before* rendering it (forgive the emphasis).
+You must call the `renderStyles()` function *after* importing the view but *before* rendering it (forgive the emphasis).
 Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view is itself inserted.
 Note that rendering the styles in this way is not done for you as part of the build process.
 You must explicitly call the `renderStyles()` function, ideally immediately before the `ReactDOM.render()` function.
+
+### Creating primitive components with styles
+
+All of the standard HTML elements are supported.
+For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file.
+You can access these components, which are actually pure functional components, by dereferencing the `withStyle()` function:
+
+```js
+const Link = withStyle.a`
+
+        color: ${white};
+        text-decoration: none;
+
+        @media (min-width: ${desktop}) {
+          color: ${black};
+        }
+
+      `;
+```
+
+Now you are free to use the `Link` component as JSX is the usual way.
+Note that expression interpolation is supported.
+Here variables for colours and a breakpoint have been substituted into the template literal, for example.
+Functions are also supported.
+If a function is encountered, it is executed and its return valued is utilised.
+To learn more about template literals in general and expression interpolation in particular, see the MDN page on [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ## Compiling from source
 
