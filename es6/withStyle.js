@@ -1,64 +1,103 @@
 'use strict';
 
-const Medias = require('./style/medias'),
-      RuleSets = require('./style/ruleSets'),
-      Declarations = require('./style/declarations');
+const reaction = require('reaction');
 
-class Style {
-  constructor(declarations, ruleSets, medias) {
-    this.declarations = declarations;
-    this.ruleSets = ruleSets;
-    this.medias = medias;
-  }
+const tagNames = require('./tagNames'),
+      stylesUtilities = require('./utilities/styles'),
+      classNameUtilities = require('./utilities/className');
 
-  getDeclarations() {
-    return this.declarations;
-  }
+const { React } = reaction,
+      { generateClassName } = classNameUtilities,
+      { generateStyle, retrieveStyle, retrieveStylesCSS } = stylesUtilities;
 
-  getRuleSets() {
-    return this.ruleSets;
-  }
+function withStyle(ComponentOrFunction) {
+  return function() {
+    const args = [...arguments];  ///
 
-  getMedias() {
-    return this.medias;
-  }
+    let oldStyle = null,
+        { className } = ComponentOrFunction;
 
-  override(oldStyle) {
-    const declarations = oldStyle.getDeclarations(),
-          ruleSets = oldStyle.getRuleSets(),
-          medias = oldStyle.getMedias();
+    if (className) {
+      ComponentOrFunction = isSubclassOf(ComponentOrFunction, React.Component) ?
+                              class extends ComponentOrFunction {} :
+                                ComponentOrFunction.bind({});
 
-    this.unshift(declarations, ruleSets, medias);
-  }
+      oldStyle = retrieveStyle(className);
+    }
 
-  unshift(declarations, ruleSets, medias) {
-    this.declarations.unshift(declarations);
-    this.ruleSets.unshift(ruleSets);
-    this.medias.unshift(medias);
-  }
+    className = generateClassName();
 
-  asCSS(className) {
-    const indent = '  ',
-          declarationsCSS = this.declarations.asCSS(indent),
-          ruleSetsCSS = this.ruleSets.asCSS(className),
-          mediasCSS = this.medias.asCSS(className),
-          html = `.${className} {
-${declarationsCSS}
+    generateStyle(args, className, oldStyle);
+
+    Object.assign(ComponentOrFunction, {
+      className
+    });
+
+    return ComponentOrFunction;
+  };
 }
 
-${ruleSetsCSS}${mediasCSS}`;
+function appendStyles() {
+  const stylesCSS = retrieveStylesCSS(),
+        innerHTML = `
+        
+${stylesCSS}`,
+        headDOMElement = document.querySelector('head'),
+        styleDOMElement = document.createElement('style');
 
-    return html;
-  }
+  Object.assign(styleDOMElement, {
+    innerHTML
+  });
 
-  static fromNodeAndTokens(node, tokens) {
-    const declarations = Declarations.fromNodeAndTokens(node, tokens),
-          ruleSets = RuleSets.fromNodeAndTokens(node, tokens),
-          medias = Medias.fromNodeAndTokens(node, tokens),
-          style = new Style(declarations, ruleSets, medias);
-
-    return style;
-  }
+  headDOMElement.appendChild(styleDOMElement);
 }
 
-module.exports = Style;
+function retrieveClassName(element) {
+  const { className } = element.reactFunction || element.reactComponent.constructor;
+
+  return className;
+}
+
+Object.assign(withStyle, {
+  appendStyles,
+  retrieveClassName
+});
+
+tagNames.forEach(function(tagName) {
+  Object.defineProperty(withStyle, tagName, {
+    get: () => function() {
+      const args = [...arguments],  ///
+            className = generateClassName();
+
+      generateStyle(args, className);
+
+      return (props) => {
+        const { children } = props;
+
+        props.className = props.className ?
+                           `${className} ${props.className}` :
+                              className;
+
+        return React.createElement(tagName, props, ...children);
+      };
+    }
+  });
+});
+
+module.exports = withStyle;
+
+function isSubclassOf(argument, Class) {
+  let subclass = false;
+
+  if (argument === Class) {   ///
+    subclass = true;
+  } else {
+    argument = Object.getPrototypeOf(argument); ///
+
+    if (argument !== null) {
+      subclass = isSubclassOf(argument, Class);
+    }
+  }
+
+  return subclass;
+}

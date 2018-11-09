@@ -1,6 +1,6 @@
 'use strict';
 
-const dom = require('../../_occam-dom'),  ///
+const dom = require('../_occam-dom'),  ///
       necessary = require('necessary');
 
 const Declarations = require('./declarations');
