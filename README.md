@@ -307,6 +307,34 @@ Now you could create an external style sheet for styling the rendered HTML:
 
 }
 ```
+Other than this restriction, most of standard CSS is supported with the caveat that there is definitely room for improvement in the CSS parser.
+All of the following CSS is fine, for example:
+```css
+  color: ${black};
+  border: ${border};
+  display: block;
+  position: relative;
+
+  .error {
+    border-color: ${fiery};
+  }
+
+  :disabled {
+    background-color: ${white};
+  }
+
+  ::after {
+    content: "×";
+    position: absolute;
+    font-family: monospace;
+  }
+
+  [readonly] {
+    color: ${shuttle};
+  }
+```
+Note that all of the selectors, including the class name selector, relate to the the component's topmost rendered element.
+If it helps you can think of this as SASS but without the need for an ampersand.
 
 ## Compiling from source
 
