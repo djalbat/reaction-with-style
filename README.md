@@ -204,7 +204,8 @@ Now you can extend the component thus:
 ```js
 const MainButton = withStyle(Button)`
 
- ...
+  ...
+
 `;
 ```
 
@@ -219,7 +220,7 @@ class MainButton extends Button {
 
 module.exports = withStyle(MainButton)`
 
-   ...
+  ...
 
 `;
 ```
@@ -242,7 +243,7 @@ class MainButton extends Button {
 
 module.exports = withStyle(MainButton)`
 
-   ...
+  ...
 
 `;
 ```
