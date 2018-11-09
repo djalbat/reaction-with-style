@@ -45,7 +45,7 @@ ReactDOM.render(
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it.
 Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view is itself inserted.
 Note that rendering the styles in this way is not done for you as part of the build process.
-You must explicitly call the `renderStyles()` function, ideally immediately before the `ReactDOM.render()` function.
+It is worth repeating that you must explicitly call the `renderStyles()` function, ideally immediately before the `ReactDOM.render()` function.
 
 ### Creating primitive components with styles
 
@@ -92,18 +92,50 @@ const Header = (props) => {
 
   );
 };
-```
 
 module.exports = withStyle(Header)`
 
   ...
 
 `;
+```
 
-In fact in this case the `withStyle()` function will simply return the function that you pass to it.
+In this case the `withStyle()` function will simply return the function that you pass to it.
 The only change it makes is to assign a `className` property to the function.
 This is the name of the CSS class it generates for the component.
 You must retrieve this and pass it as an argument to the topmost JSX element that the function returns.
+
+### Creating standard components with styles
+
+The process is much the same as for functional components:
+
+```js
+class Button extends React.Component {
+  render(update) {
+    const { className } = Button,
+          ...
+          ;
+
+    return (
+
+      <button className={className} ...>
+
+        ...
+
+      </button>
+      
+    );
+  }
+}
+
+module.exports = withStyle(AccordionButton)`
+
+  ...
+
+`;
+```
+
+Here, not unsurprisingly, you destruct the class to get hold of the requisite `className` prooperty.
 
 ## Compiling from source
 
