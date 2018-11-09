@@ -23,10 +23,10 @@ class Style {
     return this.medias;
   }
 
-  override(oldStyle) {
-    const declarations = oldStyle.getDeclarations(),
-          ruleSets = oldStyle.getRuleSets(),
-          medias = oldStyle.getMedias();
+  extends(superStyle) {
+    const declarations = superStyle.getDeclarations(),
+          ruleSets = superStyle.getRuleSets(),
+          medias = superStyle.getMedias();
 
     this.unshift(declarations, ruleSets, medias);
   }

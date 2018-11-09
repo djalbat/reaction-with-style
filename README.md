@@ -42,7 +42,7 @@ ReactDOM.render(
 );
 ```
 
-You must call the `renderStyles()` function *after* importing the view but *before* rendering it (forgive the emphasis).
+You must call the `renderStyles()` function *after* importing the view but *before* rendering it.
 Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view is itself inserted.
 Note that rendering the styles in this way is not done for you as part of the build process.
 You must explicitly call the `renderStyles()` function, ideally immediately before the `ReactDOM.render()` function.
@@ -73,6 +73,37 @@ Here variables for colours and a breakpoint have been substituted into the templ
 Functions are also supported.
 If a function is encountered, it is executed and its return valued is utilised.
 To learn more about template literals in general and expression interpolation in particular, see the MDN page on [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+### Creating functional components with styles
+
+This can be done easily with the `withStyle()` function, which effectively acts as a higher order component:
+
+```js
+const Header = (props) => {
+  const { className } = Header;
+
+  return (
+
+    <header className={className}>
+
+      ...
+
+    </header>
+
+  );
+};
+```
+
+module.exports = withStyle(Header)`
+
+  ...
+
+`;
+
+In fact in this case the `withStyle()` function will simply return the function that you pass to it.
+The only change it makes is to assign a `className` property to the function.
+This is the name of the CSS class it generates for the component.
+You must retrieve this and pass it as an argument to the topmost JSX element that the function returns.
 
 ## Compiling from source
 

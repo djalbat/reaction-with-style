@@ -12,7 +12,7 @@ const cssLexer = CSSLexer.fromNothing(),
       cssParser = CSSParser.fromNothing(),
       styleMap = {};
 
-function generateStyle(args, className, oldStyle = null) {
+function generateStyle(args, className, superStyle = null) {
   const strings = args.shift(),	///
         content = strings.reduce(function(content, cssString, index) {
           const arg = args[index];
@@ -35,8 +35,8 @@ function generateStyle(args, className, oldStyle = null) {
         node = cssParser.parse(tokens),
         style = Style.fromNodeAndTokens(node, tokens);
 
-        if (oldStyle !== null) {
-          style.override(oldStyle);
+        if (superStyle !== null) {
+          style.extends(superStyle);
         }
 
         styleMap[className] = style;
