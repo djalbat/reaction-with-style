@@ -71,9 +71,8 @@ tagNames.forEach(function(tagName) {
 
       generateStyle(args, className);
 
-      return (props, context, element) => {
-        const className = retrieveClassName(element),
-              { children } = props;
+      return (props) => {
+        const { children } = props;
 
         props.className = props.className ?
                            `${className} ${props.className}` :
