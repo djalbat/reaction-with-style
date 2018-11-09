@@ -154,8 +154,6 @@ Now both `Link` and `HeaderLink` components are available, each with their own a
 
 For functional and class components, a little care is needed.
 Rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
-This needs to be used in both the component that is doing the extending, so to speak, *and* the component that is being extended.
-
 For example, if the `Header` functional component is to be extended, it must first be amended thus:
 
 ```js
@@ -172,8 +170,7 @@ const Header = (props, context, element) => {
 };
 ```
 Note that the arguments now include a third `element` argument that must be passed to the `retrieveClassName()` function.
-
-Now you can extend this component thus:
+Now you can extend the component thus:
 
 ```js
 const MainHeader = withStyle(Header)`
@@ -183,7 +180,6 @@ const MainHeader = withStyle(Header)`
 `
 ```
 Similarly for class components.
-
 For example, if the `Button` class component is to be extended, it must first be amended thus:
 ```js
 const { retrieveClassName } = withStyle;
@@ -203,7 +199,6 @@ class Button extends React.Component {
 }
 ```
 Here you pass `this` to the `retrieveClassName()` function.
-
 Now you can extend the component thus:
 
 ```js
