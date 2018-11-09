@@ -1,5 +1,3 @@
 'use strict';
 
-module.exports = {
-  withStyle: require('./lib/withStyle')
-};
+module.exports = require('./lib/withStyle');
