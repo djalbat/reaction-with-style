@@ -170,14 +170,14 @@ const Header = (props, context, element) => {
 };
 ```
 Note that the arguments now include a third `element` argument that must be passed to the `retrieveClassName()` function.
-Now you can extend the component thus:
+Now the component can be extended thus:
 
 ```js
 const MainHeader = withStyle(Header)`
 
   ...
 
-`
+`;
 ```
 Similarly for class components.
 For example, if the `Button` class component is to be extended, it must first be amended thus:
@@ -205,7 +205,7 @@ Now you can extend the component thus:
 const MainButton = withStyle(Button)`
 
  ...
-`
+`;
 ```
 
 Or, if you want to do more than extend its styles, extending its functionality too, yoiu can do so:
@@ -221,7 +221,7 @@ module.exports = withStyle(MainButton)`
 
    ...
 
-`
+`;
 ```
 Finally for class components, if you include a `render()` method not in the class being extended but in the class doing the extending, so to speak, you again need to utilise the `retrieveClassName()` function thus:
 
@@ -244,7 +244,7 @@ module.exports = withStyle(MainButton)`
 
    ...
 
-`
+`;
 ```
 
 In order to avoid any confusion, you could always use the `retrieveClassName()` function regardless of whether components are being extended or not, and this would do no harm at all.
