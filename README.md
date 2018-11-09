@@ -2,6 +2,8 @@
 
 Programmatic styles for [Reaction](https://github.com/djalbat/reaction).
 
+This package was inspired by [styled-components](https://www.styled-components.com/). It is to [Reaction](https://github.com/djalbat/reaction) what styled components are to React, although there are differences.
+
 ## Installation
 
 With [npm](https://www.npmjs.com/):
@@ -19,7 +21,26 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 ## Usage
 
 ```js
-var withStyle = require('reaction-with-style'); ///
+const reaction = require('reaction'),
+      withStyle = require('reaction-with-style');
+
+const { ReactDOM } = reaction,
+      { appendStyles } = withStyle;
+
+const View = require('./view');
+
+appendStyles();
+
+const bodyDOMElement = document.querySelector('body');
+
+ReactDOM.render(
+
+    <View />
+
+  ,
+  bodyDOMElement
+);
+```
 
 ## Compiling from source
 
