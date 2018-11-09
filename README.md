@@ -22,7 +22,7 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 ```js
 const reaction = require('reaction'),
-      withStyle = require('reaction-with-style');
+      withStyle = require('reaction-with-style');   ///
 
 const { ReactDOM } = reaction,
       { renderStyles } = withStyle;
@@ -44,14 +44,13 @@ ReactDOM.render(
 
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it.
 Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view is itself inserted.
-Note that rendering the styles in this way is not done for you as part of the build process.
-It is worth repeating that you must explicitly call the `renderStyles()` function, ideally immediately before the `ReactDOM.render()` function.
+Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before the `ReactDOM.render()` function.
 
-### Creating primitive components with styles
+### Creating primitive components with style
 
 All of the standard HTML elements are supported.
 For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file.
-You can access these components, which are actually pure functional components, by dereferencing the `withStyle()` function:
+You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
 
 ```js
 const Link = withStyle.a`
@@ -66,15 +65,16 @@ const Link = withStyle.a`
       `;
 ```
 
-Now you are free to use the `Link` component as JSX is the usual way.
+Now you are free to use the `Link` component in the usual way.
 
 Note that expression interpolation is supported.
 Here variables for colours and a breakpoint have been substituted into the template literal, for example.
 Functions are also supported.
 If a function is encountered, it is executed and its return valued is utilised.
-To learn more about template literals in general and expression interpolation in particular, see the MDN page on [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
-### Creating functional components with styles
+To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+### Creating functional components with style
 
 This can be done easily with the `withStyle()` function, which effectively acts as a higher order component:
 
@@ -101,11 +101,10 @@ module.exports = withStyle(Header)`
 ```
 
 In this case the `withStyle()` function will simply return the function that you pass to it.
-The only change it makes is to assign a `className` property to it.
-This is the name of the CSS class generated for the component.
-You must retrieve this property and pass it as an argument to the topmost JSX element that the function returns.
+The only change it makes is assigning a `className` property, which is the name of the CSS class generated for the component.
+You must retrieve this property and pass it as an attribute to the outermost JSX element that the function returns.
 
-### Creating class components with styles
+### Creating class components with style
 
 The process is much the same as for functional components:
 
@@ -137,11 +136,10 @@ module.exports = withStyle(AccordionButton)`
 
 Here, not unsurprisingly, you must destructure the class in order to get hold of the requisite `className` property.
 
-### Extending components with styles
+### Extending components with style
 
-Primitive components can be extended straightforwardly.
-Consider the `Link` component created earlier.
-It can be extended thus:
+Primitive components can be extended easily.
+For example, the `Link` component above can be extended thus:
 
 ```js
 const HeaderLink = withStyle(Link)`
@@ -150,7 +148,7 @@ const HeaderLink = withStyle(Link)`
 
 `;
 ```
-Now both `Link` and `HeaderLink` components are available, each with their own associated styles.
+Now both `Link` and `HeaderLink` components are available, each with their own associated style.
 
 For functional and class components, a little care is needed.
 Rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
@@ -169,7 +167,7 @@ const Header = (props, context, element) => {
   );
 };
 ```
-Note that the arguments now include a third `element` argument that must be passed to the `retrieveClassName()` function.
+Note that the arguments now include a third `element` argument which must be passed to the `retrieveClassName()` function.
 Now the component can be extended thus:
 
 ```js
@@ -209,7 +207,7 @@ const MainButton = withStyle(Button)`
 `;
 ```
 
-Or, if you want to do more than extend its styles, extending its functionality too, yoiu can do so:
+If you want to do extend a component's functionality as well as its style, you can do so:
 
 ```js
 class MainButton extends Button {
@@ -247,9 +245,9 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-In order to avoid any confusion, you could always use the `retrieveClassName()` function regardless of whether components are being extended or not, and this would do no harm at all.
+In order to avoid any confusion, you could chose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all.
 
-## What kind of CSS is supported?
+## What subset of CSS is supported?
 
 Not all of it.
 You cannot, for example, make references to child elements at all.
@@ -266,9 +264,11 @@ a {
 ```
 Not being able to do so is restrictive, admittedly, but deliberately so.
 After all the idea is to tightly bind a component to its style.
+Hence we create a child `Link` component, rather than style it by way of its parent.
+
 If you really must style the child elements of components in some way, and there are occasions when doing so is unavoidable, add a fixed class name to the component and define this class in an external style sheet.
 For example, say you wanted to create a component for viewing markdown.
-The markdown is rendered as HTML and you would like to style the resultant images, titles and so on.
+The markdown is to be rendered as HTML and you would like to style the resultant images, titles and so on.
 You could implement your component thus:
 
 ```js
@@ -307,7 +307,7 @@ Now you could create an external style sheet for styling the rendered HTML:
 
 }
 ```
-Other than this restriction, most of standard CSS is supported with the caveat that there is definitely room for improvement in the CSS parser.
+Other than this restriction, most of standard CSS is supported.
 All of the following CSS is fine, for example:
 ```css
   color: ${black};
@@ -337,7 +337,7 @@ All of the following CSS is fine, for example:
     margin: 0;
   }
 ```
-Note that all of the selectors, including the class selector, relate to the the component's topmost rendered element.
+Note that all of the selectors, including the class selector, relate to the the component's outermost rendered element.
 
 ## Compiling from source
 
