@@ -67,6 +67,7 @@ const Link = withStyle.a`
 ```
 
 Now you are free to use the `Link` component as JSX is the usual way.
+
 Note that expression interpolation is supported.
 Here variables for colours and a breakpoint have been substituted into the template literal, for example.
 Functions are also supported.
