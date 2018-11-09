@@ -123,7 +123,7 @@ class Button extends React.Component {
         ...
 
       </button>
-      
+
     );
   }
 }
@@ -135,7 +135,7 @@ module.exports = withStyle(AccordionButton)`
 `;
 ```
 
-Here, not unsurprisingly, you destruct the class to get hold of the requisite `className` prooperty.
+Here, not unsurprisingly, you must destructure the class in order to get hold of the requisite `className` property.
 
 ## Compiling from source
 
