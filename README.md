@@ -101,9 +101,9 @@ module.exports = withStyle(Header)`
 ```
 
 In this case the `withStyle()` function will simply return the function that you pass to it.
-The only change it makes is to assign a `className` property to the function.
-This is the name of the CSS class it generates for the component.
-You must retrieve this and pass it as an argument to the topmost JSX element that the function returns.
+The only change it makes is to assign a `className` property to it.
+This is the name of the CSS class generated for the component.
+You must retrieve this property and pass it as an argument to the topmost JSX element that the function returns.
 
 ### Creating class components with styles
 
@@ -137,7 +137,7 @@ module.exports = withStyle(AccordionButton)`
 
 Here, not unsurprisingly, you must destructure the class in order to get hold of the requisite `className` property.
 
-### Extending styles
+### Extending components with styles
 
 Primitive components can be extended straightforwardly.
 Consider the `Link` component created earlier.
@@ -150,7 +150,7 @@ const HeaderLink = withStyle(Link)`
 
 `;
 ```
-Now both `Link` and `HeaderLink` are available as JSX, each with their own associated styles.
+Now both `Link` and `HeaderLink` components are available, each with their own associated styles.
 
 For functional and class components, a little care is needed.
 Rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
@@ -172,7 +172,8 @@ const Header = (props, context, element) => {
 };
 ```
 Note that the arguments now include a third `element` argument that must be passed to the `retrieveClassName()` function.
-Now you can extend this component easily enough:
+
+Now you can extend this component thus:
 
 ```js
 const MainHeader = withStyle(Header)`
@@ -202,6 +203,54 @@ class Button extends React.Component {
 }
 ```
 Here you pass `this` to the `retrieveClassName()` function.
+
+Now you can extend the component thus:
+
+```js
+const MainButton = withStyle(Button)`
+
+ ...
+`
+```
+
+Or, if you want to do more than extend its styles, extending its functionality too, yoiu can do so:
+
+```js
+class MainButton extends Button {
+
+  ...
+
+}
+
+module.exports = withStyle(MainButton)`
+
+   ...
+
+`
+```
+Finally for class components, if you include a `render()` method not in the class being extended but in the class doing the extending, so to speak, you again need to utilise the `retrieveClassName()` function thus:
+
+```js
+class MainButton extends Button {
+  render(update) {
+    const className = retrieveClassName(this),
+          ...
+          ;
+
+    return (
+
+      ...
+
+    );
+  }
+}
+
+module.exports = withStyle(MainButton)`
+
+   ...
+
+`
+```
 
 In order to avoid any confusion, you could always use the `retrieveClassName()` function regardless of whether components are being extended or not, and this would do no harm at all.
 
