@@ -25,11 +25,11 @@ const reaction = require('reaction'),
       withStyle = require('reaction-with-style');
 
 const { ReactDOM } = reaction,
-      { appendStyles } = withStyle;
+      { renderStyles } = withStyle;
 
 const View = require('./view');
 
-appendStyles();
+renderStyles();
 
 const bodyDOMElement = document.querySelector('body');
 
@@ -41,6 +41,11 @@ ReactDOM.render(
   bodyDOMElement
 );
 ```
+
+Note that you must call `renderStyles()` *after* importing the view but *before* rendering it (forgive the emphasis).
+Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view is itself inserted.
+Note that rendering the styles in this way is not done for you as part of the build process.
+You must explicitly call the `renderStyles()` function, ideally immediately before the `ReactDOM.render()` function.
 
 ## Compiling from source
 

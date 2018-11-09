@@ -37,7 +37,7 @@ function withStyle(ComponentOrFunction) {
   };
 }
 
-function appendStyles() {
+function renderStyles() {
   const stylesCSS = retrieveStylesCSS(),
         innerHTML = `
         
@@ -59,7 +59,7 @@ function retrieveClassName(element) {
 }
 
 Object.assign(withStyle, {
-  appendStyles,
+  renderStyles,
   retrieveClassName
 });
 
@@ -89,7 +89,7 @@ module.exports = withStyle;
 function isSubclassOf(argument, Class) {
   let subclass = false;
 
-  if (argument === Class) {   ///
+  if (argument.name === Class.name) {   ///
     subclass = true;
   } else {
     argument = Object.getPrototypeOf(argument); ///
