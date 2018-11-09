@@ -256,17 +256,17 @@ You cannot, for example, make references to child elements at all.
 In the `Header` usage example above, for example, you would not be able to style the child `Link` component as follows:
 
 ```css
+...
+
+a {
+
   ...
 
-  a {
-
-    ...
-
-  }
+}
 ```
-This is restrictive, but deliberately so.
+Not being able to do so is restrictive, admittedly, but deliberately so.
 After all the idea is to tightly bind a component to its style.
-If you really must style components in this way, and there are occasions when doing so is unavoidable, add a fixed class name to the component and define this class in an external style sheet.
+If you really must style the child elements of components in some way, and there are occasions when doing so is unavoidable, add a fixed class name to the component and define this class in an external style sheet.
 For example, say you wanted to create a component for viewing markdown.
 The markdown is rendered as HTML and you would like to style the resultant images, titles and so on.
 You could implement your component thus:
@@ -301,13 +301,11 @@ module.exports = withStyle(MarkdownViewer)`
 ```
 Now you could create an external style sheet for styling the rendered HTML:
 ```css
+.markdown {
 
-  .markdown {
+   ...
 
-     ...
-
-  }
-
+}
 ```
 
 ## Compiling from source
