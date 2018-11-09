@@ -14,7 +14,7 @@ function withStyle(ComponentOrFunction) {
   return function() {
     const args = [...arguments];  ///
 
-    let oldStyle = null,
+    let superStyle = null,
         { className } = ComponentOrFunction;
 
     if (className) {
@@ -22,12 +22,12 @@ function withStyle(ComponentOrFunction) {
                               class extends ComponentOrFunction {} :
                                 ComponentOrFunction.bind({});
 
-      oldStyle = retrieveStyle(className);
+      superStyle = retrieveStyle(className);
     }
 
     className = generateClassName();
 
-    generateStyle(args, className, oldStyle);
+    generateStyle(args, className, superStyle);
 
     Object.assign(ComponentOrFunction, {
       className
@@ -71,8 +71,9 @@ tagNames.forEach(function(tagName) {
 
       generateStyle(args, className);
 
-      return (props) => {
-        const { children } = props;
+      return (props, context, element) => {
+        const className = retrieveClassName(element),
+              { children } = props;
 
         props.className = props.className ?
                            `${className} ${props.className}` :
