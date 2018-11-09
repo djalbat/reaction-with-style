@@ -332,9 +332,12 @@ All of the following CSS is fine, for example:
   [readonly] {
     color: ${shuttle};
   }
+
+  @media (min-width: ${desktop}) {
+    margin: 0;
+  }
 ```
-Note that all of the selectors, including the class name selector, relate to the the component's topmost rendered element.
-If it helps you can think of this as SASS but without the need for an ampersand.
+Note that all of the selectors, including the class selector, relate to the the component's topmost rendered element.
 
 ## Compiling from source
 
