@@ -55,20 +55,20 @@ You can access these components, which are simple functional components, by dere
 ```js
 const Link = withStyle.a`
 
-        color: ${white};
-        text-decoration: none;
+  color: ${white};
+  text-decoration: none;
 
-        @media (min-width: ${desktop}) {
-          color: ${black};
-        }
+  @media (min-width: ${desktop}) {
+    color: ${black};
+  }
 
-      `;
+`;
 ```
 
 Now you are free to use the `Link` component in the usual way.
 
 Note that expression interpolation is supported.
-Here variables for colours and a breakpoint have been substituted into the template literal, for example.
+For example, here variables for colours and a breakpoint have been substituted into the template literal.
 Functions are also supported.
 If a function is encountered, it is executed and its return valued is utilised.
 
@@ -76,7 +76,7 @@ To learn more about template literals in general and expression interpolation in
 
 ### Creating functional components with style
 
-This can be done easily with the `withStyle()` function, which effectively acts as a higher order component:
+This can be done with the `withStyle()` function, which effectively acts as a higher order component:
 
 ```js
 const Header = (props) => {
@@ -101,7 +101,7 @@ module.exports = withStyle(Header)`
 ```
 
 In this case the `withStyle()` function will simply return the function that you pass to it.
-The only change it makes is assigning a `className` property, which is the name of the CSS class generated for the component.
+The only discernible change it makes is to assign a `className` property, which is the name of the CSS class generated for the component.
 You must retrieve this property and pass it as an attribute to the outermost JSX element that the function returns.
 
 ### Creating class components with style
@@ -139,7 +139,7 @@ Here, not unsurprisingly, you must destructure the class in order to get hold of
 ### Extending components with style
 
 Primitive components can be extended easily.
-For example, the `Link` component above can be extended thus:
+For example, the `Link` component above can be extended as follows:
 
 ```js
 const HeaderLink = withStyle(Link)`
@@ -149,10 +149,12 @@ const HeaderLink = withStyle(Link)`
 `;
 ```
 Now both `Link` and `HeaderLink` components are available, each with their own associated style.
+The `HeaderLink` component will have the `Link` component's style followed by its own.
+In this way the new style added to the `HeaderLink` component will take precedence over the `Link` style.
 
 For functional and class components, a little care is needed.
 Rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
-For example, if the `Header` functional component is to be extended, it must first be amended thus:
+For example, if the `Header` functional component is to be extended, it must first be amended:
 
 ```js
 const { retrieveClassName } = withStyle;
@@ -168,7 +170,7 @@ const Header = (props, context, element) => {
 };
 ```
 Note that the arguments now include a third `element` argument which must be passed to the `retrieveClassName()` function.
-Now the component can be extended thus:
+Now the component can be extended:
 
 ```js
 const MainHeader = withStyle(Header)`
@@ -178,7 +180,7 @@ const MainHeader = withStyle(Header)`
 `;
 ```
 Similarly for class components.
-For example, if the `Button` class component is to be extended, it must first be amended thus:
+For example, if the `Button` class component is to be extended, it must first be amended:
 ```js
 const { retrieveClassName } = withStyle;
 
@@ -197,7 +199,7 @@ class Button extends React.Component {
 }
 ```
 Here you pass `this` to the `retrieveClassName()` function.
-Now you can extend the component thus:
+Now you can extend it:
 
 ```js
 const MainButton = withStyle(Button)`
@@ -222,7 +224,7 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-Finally for class components, if you include a `render()` method not in the class being extended but in the class doing the extending, so to speak, you again need to utilise the `retrieveClassName()` function:
+Finally, for class components, if you include a `render()` method not in the class being extended but in the class doing the extending, so to speak, you again need to utilise the `retrieveClassName()` function:
 
 ```js
 class MainButton extends Button {
@@ -245,13 +247,26 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
+
+There is no great secret to the `retrieveClassName()` function, by the way.
+Elements in the virtual DOM keep references to their corresponding components in order to call their lifecycle methods, for one thing.
+The `retrieveClassName()` function simply makes use of this reference in order to destructure the right component:
+
+```js
+function retrieveClassName(element) {
+  const { className } = element.reactFunction || element.reactComponent.constructor;
+
+  return className;
+}
+```
+
 In order to avoid any confusion, you could chose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all.
 
-## What subset of CSS is supported?
+## What CSS is supported?
 
 Not all of it.
 You cannot, for example, make references to child elements at all.
-In the `Header` usage example above, for example, you would not be able to style the child `Link` component as follows:
+In the style for the `Header` component, for example, you would not be able to style the child `Link` component as follows:
 
 ```css
 ...
@@ -266,7 +281,7 @@ Not being able to do so is restrictive, admittedly, but deliberately so.
 After all the idea is to tightly bind a component to its style.
 Hence we create a child `Link` component, rather than style it by way of its parent.
 
-If you really must style the child elements of components in some way, and there are occasions when doing so is unavoidable, add a fixed class name to the component and define this class in an external style sheet.
+If you really must style the child elements of components in some way, and there are occasions this is unavoidable, add a fixed class name to the component and define this class in an external style sheet.
 For example, say you wanted to create a component for viewing markdown.
 The markdown is to be rendered as HTML and you would like to style the resultant images, titles and so on.
 You could implement your component thus:
