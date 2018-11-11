@@ -149,11 +149,10 @@ const HeaderLink = withStyle(Link)`
 `;
 ```
 Now both `Link` and `HeaderLink` components are available, each with their own associated style.
-The `HeaderLink` component will have the `Link` component's style followed by its own.
-In this way the new style added to the `HeaderLink` component will take precedence over the `Link` style.
 
 For functional and class components, a little care is needed.
-Rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
+
+For functional components, rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
 For example, if the `Header` functional component is to be extended, it must first be amended:
 
 ```js
@@ -179,8 +178,8 @@ const MainHeader = withStyle(Header)`
 
 `;
 ```
-Similarly for class components.
-For example, if the `Button` class component is to be extended, it must first be amended:
+Similarly for class components in some cases.
+For example, if the `Button` class component is to be extended, its `render()` method must first be amended:
 ```js
 const { retrieveClassName } = withStyle;
 
@@ -224,12 +223,14 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-Finally, for class components, if you include a `render()` method not in the class being extended but in the class doing the extending, so to speak, you again need to utilise the `retrieveClassName()` function:
+The rule is that if the `render()` method is in the class being extended and not the class doing the extending, so to speak, the `render()` method must utilise the `retrieveClassName()` function.
+Otherwise, there is no need.
+For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, simple destructuring of the `MainButton` class will do:
 
 ```js
 class MainButton extends Button {
   render(update) {
-    const className = retrieveClassName(this),
+    const { className } = MainButton,
           ...
           ;
 
@@ -260,7 +261,7 @@ function retrieveClassName(element) {
 }
 ```
 
-In order to avoid any confusion, you could chose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all.
+In order to avoid any confusion, you could chose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all bar the very slight overhead.
 
 ## What CSS is supported?
 
