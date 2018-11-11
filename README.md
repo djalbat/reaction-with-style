@@ -152,7 +152,7 @@ Now both `Link` and `HeaderLink` components are available, each with their own a
 
 For functional and class components, a little care is needed.
 
-For functional components, rather than destructuring the requisite function or class, you must make use of the `retrieveClassName()` function.
+For functional components, rather than destructuring the requisite function to get hold of the `className` property, you must make use of the `retrieveClassName()` function.
 For example, if the `Header` functional component is to be extended, it must first be amended:
 
 ```js
@@ -178,7 +178,7 @@ const MainHeader = withStyle(Header)`
 
 `;
 ```
-Similarly for class components in some cases.
+Similarly for class components, at least in some cases.
 For example, if the `Button` class component is to be extended, its `render()` method must first be amended:
 ```js
 const { retrieveClassName } = withStyle;
@@ -198,7 +198,7 @@ class Button extends React.Component {
 }
 ```
 Here you pass `this` to the `retrieveClassName()` function.
-Now you can extend it:
+Now you can extend it the `Button` class:
 
 ```js
 const MainButton = withStyle(Button)`
@@ -223,9 +223,8 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-The rule is that if the `render()` method is in the class being extended and not the class doing the extending, so to speak, the `render()` method must utilise the `retrieveClassName()` function.
-Otherwise, there is no need.
-For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, simple destructuring of the `MainButton` class will do:
+The rule is that if the `render()` method is in the class being extended and not the class doing the extending the `render()` method must utilise the `retrieveClassName()` function, otherwise there is no need.
+For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, destructuring the `MainButton` class will do:
 
 ```js
 class MainButton extends Button {
@@ -251,7 +250,7 @@ module.exports = withStyle(MainButton)`
 
 There is no great secret to the `retrieveClassName()` function, by the way.
 Elements in the virtual DOM keep references to their corresponding components in order to call their lifecycle methods, for one thing.
-The `retrieveClassName()` function simply makes use of this reference in order to destructure the right component:
+The `retrieveClassName()` function simply makes use of this reference in order to destructure the right component function or class:
 
 ```js
 function retrieveClassName(element) {
