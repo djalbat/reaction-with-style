@@ -19,7 +19,7 @@ function withStyle(ClassOrFunction) {
 
     if (className) {
       if (isClass(ClassOrFunction)) {
-        if (Object.hasOwnProperty(ClassOrFunction, 'className')) {
+        if (ClassOrFunction.hasOwnProperty('className')) {
           ClassOrFunction = class extends ClassOrFunction {}; ///
         }
       } else {
