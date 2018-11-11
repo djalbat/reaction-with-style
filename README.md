@@ -224,7 +224,7 @@ module.exports = withStyle(MainButton)`
 `;
 ```
 The rule is that if the `render()` method is in the class being extended and not the class doing the extending the `render()` method must utilise the `retrieveClassName()` function, otherwise there is no need.
-For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, destructuring the `MainButton` class will do:
+For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, destructuring will do:
 
 ```js
 class MainButton extends Button {
