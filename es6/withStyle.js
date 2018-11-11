@@ -18,9 +18,13 @@ function withStyle(ClassOrFunction) {
         { className } = ClassOrFunction;
 
     if (className) {
-      ClassOrFunction = isSubclassOf(ClassOrFunction, React.Component) ?
-                          class extends ClassOrFunction {} :
-                            ClassOrFunction.bind({});
+      if (isClass(ClassOrFunction)) {
+        if (Object.hasOwnProperty(ClassOrFunction, 'className')) {
+          ClassOrFunction = class extends ClassOrFunction {}; ///
+        }
+      } else {
+        ClassOrFunction = ClassOrFunction.bind({}); ///
+      }
 
       superStyle = retrieveStyle(className);
     }
@@ -92,6 +96,8 @@ tagNames.forEach(function(tagName) {
 });
 
 module.exports = withStyle;
+
+function isClass(argument) { return isSubclassOf(argument, React.Component); }  ///
 
 function isSubclassOf(argument, Class) {
   let subclass = false;
