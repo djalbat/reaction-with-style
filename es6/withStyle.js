@@ -10,17 +10,17 @@ const { React } = reaction,
       { generateClassName } = classNameUtilities,
       { generateStyle, retrieveStyle, retrieveStylesCSS } = stylesUtilities;
 
-function withStyle(ComponentOrFunction) {
+function withStyle(ClassOrFunction) {
   return function() {
     const args = [...arguments];  ///
 
     let superStyle = null,
-        { className } = ComponentOrFunction;
+        { className } = ClassOrFunction;
 
     if (className) {
-      ComponentOrFunction = isSubclassOf(ComponentOrFunction, React.Component) ?
-                              class extends ComponentOrFunction {} :
-                                ComponentOrFunction.bind({});
+      ClassOrFunction = isSubclassOf(ClassOrFunction, React.Component) ?
+                              class extends ClassOrFunction {} :
+                                ClassOrFunction.bind({});
 
       superStyle = retrieveStyle(className);
     }
@@ -29,11 +29,11 @@ function withStyle(ComponentOrFunction) {
 
     generateStyle(args, className, superStyle);
 
-    Object.assign(ComponentOrFunction, {
+    Object.assign(ClassOrFunction, {
       className
     });
 
-    return ComponentOrFunction;
+    return ClassOrFunction;
   };
 }
 
@@ -71,15 +71,22 @@ tagNames.forEach(function(tagName) {
 
       generateStyle(args, className);
 
-      return (props) => {
-        const { children } = props;
+      const Function = (props, context, element) => {
+        const className = retrieveClassName(element),
+              { children } = props;
 
         props.className = props.className ?
-                           `${className} ${props.className}` :
-                              className;
+                            `${className} ${props.className}` :
+                               className;
 
         return React.createElement(tagName, props, ...children);
       };
+
+      Object.assign(Function, {
+        className
+      });
+
+      return Function;
     }
   });
 });
