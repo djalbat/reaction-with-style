@@ -19,8 +19,8 @@ function withStyle(ClassOrFunction) {
 
     if (className) {
       ClassOrFunction = isSubclassOf(ClassOrFunction, React.Component) ?
-                              class extends ClassOrFunction {} :
-                                ClassOrFunction.bind({});
+                          class extends ClassOrFunction {} :
+                            ClassOrFunction.bind({});
 
       superStyle = retrieveStyle(className);
     }
