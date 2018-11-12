@@ -43,7 +43,7 @@ ReactDOM.render(
 ```
 
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it.
-Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view is itself inserted.
+Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself.
 Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before the `ReactDOM.render()` function.
 
 ### Creating primitive components with style
@@ -198,7 +198,7 @@ class Button extends React.Component {
 }
 ```
 Here you pass `this` to the `retrieveClassName()` function.
-Now you can extend it the `Button` class:
+Now you can extend the style of the `Button` class:
 
 ```js
 const MainButton = withStyle(Button)`
@@ -223,7 +223,8 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-The rule is that if the `render()` method is in the class being extended and not the class doing the extending the `render()` method must utilise the `retrieveClassName()` function, otherwise there is no need.
+The rule for when and when not utilise the `retrieveClassName()` function in class components is as follows:
+if the `render()` method is in the class being extended and not the class doing the extending, so to speak, the `render()` method must utilise the `retrieveClassName()` function, otherwise there is no need.
 For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, destructuring will do:
 
 ```js
