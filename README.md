@@ -178,7 +178,7 @@ const MainHeader = withStyle(Header)`
 
 `;
 ```
-Similarly for class components, at least in some cases.
+Similarly for class components.
 For example, if the `Button` class component is to be extended, its `render()` method must first be amended:
 ```js
 const { retrieveClassName } = withStyle;
@@ -223,14 +223,13 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-The rule for when and when not utilise the `retrieveClassName()` function in class components is as follows:
-if the `render()` method is in the class being extended and not the class doing the extending, so to speak, the `render()` method must utilise the `retrieveClassName()` function, otherwise there is no need.
-For example, since the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, destructuring will do:
+If the `render()` method is in the class being extended and not the class doing the extending, so to speak, the `render()` method must still utilise the `retrieveClassName()` function.
+For example, the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, with the `retrieveClassName()` function still being used:
 
 ```js
 class MainButton extends Button {
   render(update) {
-    const { className } = MainButton,
+    const className = retrieveClassName(this),
           ...
           ;
 

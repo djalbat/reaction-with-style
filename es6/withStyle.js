@@ -18,13 +18,9 @@ function withStyle(ClassOrFunction) {
         { className } = ClassOrFunction;
 
     if (className) {
-      if (isClass(ClassOrFunction)) {
-        if (ClassOrFunction.hasOwnProperty('className')) {
-          ClassOrFunction = class extends ClassOrFunction {}; ///
-        }
-      } else {
-        ClassOrFunction = ClassOrFunction.bind({}); ///
-      }
+      ClassOrFunction = isClass(ClassOrFunction) ?
+                          class extends ClassOrFunction {} : ///
+                            ClassOrFunction.bind({}); ///
 
       superStyle = retrieveStyle(className);
     }
