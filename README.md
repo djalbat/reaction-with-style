@@ -260,7 +260,7 @@ function retrieveClassName(element) {
 }
 ```
 
-In order to avoid any confusion, you could chose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all bar the very slight overhead.
+In order to avoid any confusion, you could choose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all bar the very slight overhead.
 
 ## What CSS is supported?
 
