@@ -262,6 +262,83 @@ function retrieveClassName(element) {
 
 In order to avoid any confusion, you could choose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all bar the very slight overhead.
 
+## Placeholder class names
+
+Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging.
+It is best to add your own placeholder class names, therefore, to make the identification of HTML elements in your browser's developer tools with their corresponding components.
+For example:
+
+```js
+const MainHeader = (props) => {
+  const { className } = MainHeader;
+
+  return (
+
+    <header className={`main ${className}`}>
+
+      ...
+
+    </header>
+
+  );
+};
+
+module.exports = withStyle(MainHeader)`
+
+  ...
+
+`;
+```
+
+## An example of functional classes
+
+Programmatic styles are great for working with classes that relate directly to a component's functionality as opposed to just to appearances.
+In the example below, the usual `React.Component` class has been extended to provide a component that can be programmatically displayed and hidden:
+
+```js
+class Component extends React.Component {}
+
+Object.assign(Component, {
+  mixins: [
+    hide,
+    display,
+    isHidden,
+    isDisplayed
+  ]
+});
+
+module.exports = withStyle(Component)`
+
+  .hidden {
+
+    display: none;
+
+   }
+
+`;
+
+function hide() {
+  this.addClass('hidden');
+}
+
+function display() {
+	this.removeClass('hidden');
+}
+
+function isHidden() {
+  const hidden = this.hasClass('hidden');
+
+  return hidden;
+}
+
+function isDisplayed() {
+  const hidden = this.isHidden(),
+        displayed = !hidden;
+
+  return displayed;
+}
+```
+
 ## What CSS is supported?
 
 Not all of it.
