@@ -2,7 +2,7 @@
 
 Programmatic styles for [Reaction](https://github.com/djalbat/reaction).
 
-This package was inspired by [styled-components](https://www.styled-components.com/). It is to [Reaction](https://github.com/djalbat/reaction) what styled components are to React, although there are differences.
+This package was inspired by [styled-components](https://www.styled-components.com/). It is to Reaction what styled components are to React, although there are differences.
 
 ## Installation
 
