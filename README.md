@@ -265,7 +265,7 @@ In order to avoid any confusion, you could choose to always use the `retrieveCla
 ## Placeholder class names
 
 Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging.
-It is best to add your own placeholder class names, therefore, to make the identification of HTML elements in your browser's developer tools with their corresponding components.
+It is best to add your own placeholder class names, therefore, to make the identification of HTML elements in your browser's developer tools with their corresponding components easier.
 For example:
 
 ```js
@@ -322,7 +322,7 @@ function hide() {
 }
 
 function display() {
-	this.removeClass('hidden');
+  this.removeClass('hidden');
 }
 
 function isHidden() {
