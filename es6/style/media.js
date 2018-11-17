@@ -26,6 +26,7 @@ class Media {
   .${className} {
 ${declarationsCSS}
   }
+  
 ${ruleSetsCSS}
 }
 

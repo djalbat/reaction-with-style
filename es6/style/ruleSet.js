@@ -19,9 +19,9 @@ class RuleSet {
 
   asCSS(className, indent) {
     const declarationsCSS = this.declarations.asCSS(`  ${indent}`),
-          css = `.${className}${this.selectors} {
+          css = `${indent}.${className}${this.selectors} {
 ${declarationsCSS}
-}
+${indent}}
 
 `;
 
