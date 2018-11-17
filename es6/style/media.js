@@ -21,7 +21,7 @@ class Media {
 
   asCSS(className) {
     const declarationsCSS = this.declarations.asCSS('    '),
-          ruleSetsCSS = this.ruleSets.asCSS('  '),
+          ruleSetsCSS = this.ruleSets.asCSS(className, '  '),
           css = `@media ${this.mediaQueries} {
   .${className} {
 ${declarationsCSS}
