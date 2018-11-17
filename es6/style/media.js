@@ -3,7 +3,8 @@
 const dom = require('../_occam-dom'),  ///
       necessary = require('necessary');
 
-const Declarations = require('./declarations');
+const RuleSets = require('./ruleSets'),
+      Declarations = require('./declarations');
 
 const { arrayUtilities } = necessary,
       { Query, asContent } = dom,
@@ -12,17 +13,20 @@ const { arrayUtilities } = necessary,
 const mediaQueriesQuery = Query.fromExpression('/media/mediaQueries');
 
 class Media {
-  constructor(mediaQueries, declarations) {
+  constructor(mediaQueries, declarations, ruleSets) {
     this.mediaQueries = mediaQueries;
     this.declarations = declarations;
+    this.ruleSets = ruleSets;
   }
 
   asCSS(className) {
-    const indent = '    ',
-          declarationsCSS = this.declarations.asCSS(indent),
+    const declarationsCSS = this.declarations.asCSS('    '),
+          ruleSetsCSS = this.ruleSets.asCSS('  '),
           css = `@media ${this.mediaQueries} {
   .${className} {
 ${declarationsCSS}
+
+${ruleSetsCSS}
   }
 }
 
@@ -34,7 +38,8 @@ ${declarationsCSS}
   static fromNodeAndTokens(node, tokens) {
     const mediaQueries = mediaQueriesFromNodeAndTokens(node, tokens),
           declarations = Declarations.fromNodeAndTokens(node, tokens),
-          media = new Media(mediaQueries, declarations);
+          ruleSets = RuleSets.fromNodeAndTokens(node, tokens),
+          media = new Media(mediaQueries, declarations, ruleSets);
 
     return media;
   }

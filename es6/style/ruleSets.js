@@ -26,9 +26,9 @@ class RuleSets {
     unshift(this.array, array);
   }
 
-  asCSS(className) {
+  asCSS(className, indent) {
     const css = this.array.reduce(function(css, ruleSet) {
-      const ruleSetCSS = ruleSet.asCSS(className);
+      const ruleSetCSS = ruleSet.asCSS(className, indent);
 
       css += ruleSetCSS;
 

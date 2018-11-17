@@ -38,9 +38,8 @@ class Style {
   }
 
   asCSS(className) {
-    const indent = '  ',
-          declarationsCSS = this.declarations.asCSS(indent),
-          ruleSetsCSS = this.ruleSets.asCSS(className),
+    const declarationsCSS = this.declarations.asCSS('  '),
+          ruleSetsCSS = this.ruleSets.asCSS(className, ''),
           mediasCSS = this.medias.asCSS(className),
           html = `.${className} {
 ${declarationsCSS}

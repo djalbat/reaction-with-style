@@ -27,16 +27,19 @@ class Declarations {
   asCSS(indent) {
     let css = '';
 
-    const length = this.array.length,
-          lastIndex = length - 1;
+    const length = this.array.length;
 
-    this.array.forEach(function(declaration, index) {
-      const declarationCSS = (index === lastIndex) ?
-                              `${indent}${declaration}` :
-                                `${indent}${declaration}\n`;
+    if (length > 0) {
+      const lastIndex = length - 1;
 
-      css += declarationCSS;
-    });
+      this.array.forEach(function(declaration, index) {
+        const declarationCSS = (index === lastIndex) ?
+                                `${indent}${declaration}` :
+                                  `${indent}${declaration}\n`;
+
+        css += declarationCSS;
+      });
+    }
 
     return css;
   }
