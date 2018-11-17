@@ -9,7 +9,7 @@ const { arrayUtilities } = necessary,
       { Query } = dom,
       { unshift } = arrayUtilities;
 
-const ruleSetQuery = Query.fromExpression('/stylesheet/ruleSet');
+const ruleSetQuery = Query.fromExpression('/*/ruleSet');
 
 class RuleSets {
   constructor(array) {
