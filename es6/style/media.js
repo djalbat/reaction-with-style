@@ -25,9 +25,8 @@ class Media {
           css = `@media ${this.mediaQueries} {
   .${className} {
 ${declarationsCSS}
-
-${ruleSetsCSS}
   }
+${ruleSetsCSS}
 }
 
 `;
