@@ -274,7 +274,7 @@ const MainHeader = (props) => {
 
   return (
 
-    <header className={`main ${className}`}>
+    <header className={`${className} main`}>
 
       ...
 
