@@ -149,11 +149,12 @@ const HeaderLink = withStyle(Link)`
 `;
 ```
 Now both `Link` and `HeaderLink` components are available, each with their own associated style.
+The `HeaderLink` component will of course have all of the `Link` component's style and may override as necessary.
 
 ### Extending functional components with style
 
 In these cases a little care is needed.
-Rather than destructuring the requisite function to get hold of the `className` property, you must make use of the `retrieveClassName()` function.
+Rather than destructuring the function to get hold of the `className` property, you must make use of the `retrieveClassName()` function.
 For example, if the `Header` functional component is to be extended, it must first be amended:
 
 ```js
