@@ -75,9 +75,7 @@ tagNames.forEach(function(tagName) {
         const className = retrieveClassName(element),
               { children } = props;
 
-        props.className = props.className ?
-                           `${className} ${props.className}` :
-                              className;
+        props.className = `${className} ${props.className || ''}`;	///
 
         return React.createElement(tagName, props, ...children);
       };
