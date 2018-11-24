@@ -149,13 +149,13 @@ const HeaderLink = withStyle(Link)`
 `;
 ```
 Now both `Link` and `HeaderLink` components are available, each with their own associated style.
-The `HeaderLink` component will of course have all of the `Link` component's style and may override as necessary.
+The `HeaderLink` component will of course have all of the `Link` component's style and may override it as necessary.
 
 ### Extending functional components with style
 
 In these cases a little care is needed.
 Rather than destructuring the function to get hold of the `className` property, you must make use of the `retrieveClassName()` function.
-For example, if the `Header` functional component is to be extended, it must first be amended:
+For example, if the `Header` functional component is to be extended, it must first be amended in a similar fashion to functional components:
 
 ```js
 const { retrieveClassName } = withStyle;
@@ -213,7 +213,7 @@ const MainButton = withStyle(Button)`
 `;
 ```
 
-If you want to do extend a component's functionality by way of standard class inheritance, as well as its style, you can do so:
+If you want to do extend a component's functionality by way of class inheritance, as well as its style, you can do so:
 
 ```js
 class MainButton extends Button {
@@ -228,7 +228,7 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
-Whether the `render()` method is in the class being extended or the class doing the extending, so to speak, it must still utilise the `retrieveClassName()` function.
+Whether the `render()` method is in the class being extended or the class doing the extending, so to speak, it must utilise the `retrieveClassName()` function.
 For example, the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, with the `retrieveClassName()` function still being used:
 
 ```js
@@ -252,6 +252,8 @@ module.exports = withStyle(MainButton)`
 
 `;
 ```
+
+### Retrieving class names
 
 There is no great secret to the `retrieveClassName()` function, by the way.
 Elements in the virtual DOM keep references to their corresponding components in order to call their lifecycle methods, for one thing.
@@ -289,9 +291,9 @@ module.exports = MainButton;
 ```
 
 Note, however, that the `MainButton` class itself is exported without style.
-If you were to do otherwise, you would have to set the 'className' attribute of the inner 'Button' component and in doing so you would rob it of its own style.
+If you were to do otherwise, you would have to set the `className` attribute of the inner `Button` component and in doing so you would rob it of its own style.
 It is possible to write components in such as way as to overcome this but doing so is not recommended.
-Instead, style the child component locally, so to speak:
+Instead, you should style the child component locally, so to speak:
 
 ```js
 class MainButton extends React.Component {
@@ -364,7 +366,7 @@ const MainHeader = (props) => {
 module.exports = MainHeader;
 ```
 
-Note that because we are using composition, you cannot style with outermost `MainHeader` component anymore.
+Note that because composition is being used, you cannot style with outermost `MainHeader` component anymore.
 You should pass down only a placeholder class name and not a class name generated as a result of adding style.
 Here is the `Header` component itself:
 
