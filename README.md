@@ -46,7 +46,7 @@ You must call the `renderStyles()` function *after* importing the view but *befo
 Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself.
 Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before the `ReactDOM.render()` function.
 
-### Creating primitive components with style
+## Creating primitive components with style
 
 All of the standard HTML elements are supported.
 For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file.
@@ -74,7 +74,7 @@ If a function is encountered, it is executed and its return valued is utilised.
 
 To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
-### Creating functional components with style
+## Creating functional components with style
 
 This can be done with the `withStyle()` function, which effectively acts as a higher order component:
 
@@ -104,7 +104,7 @@ In this case the `withStyle()` function will simply return the function that you
 The only discernible change it makes is to assign a `className` property, which is the name of the CSS class generated for the component.
 You must retrieve this property and pass it as an attribute to the outermost JSX element that the function returns.
 
-### Creating class components with style
+## Creating class components with style
 
 The process is much the same as for functional components:
 
@@ -136,7 +136,7 @@ module.exports = withStyle(AccordionButton)`
 
 Here, not unsurprisingly, you must destructure the class in order to get hold of the requisite `className` property.
 
-### Extending primitive components with style
+## Extending primitive components with style
 
 Primitive components can be extended easily.
 For example, the `Link` component above can be extended as follows:
@@ -151,7 +151,7 @@ const HeaderLink = withStyle(Link)`
 Now both `Link` and `HeaderLink` components are available, each with their own associated style.
 The `HeaderLink` component will of course have all of the `Link` component's style and may override it as necessary.
 
-### Extending functional components with style
+## Extending functional components with style
 
 In these cases a little care is needed.
 Rather than destructuring the function to get hold of the `className` property, you must make use of the `retrieveClassName()` function.
@@ -181,7 +181,7 @@ const MainHeader = withStyle(Header)`
 `;
 ```
 
-### Extending class components with style
+## Extending class components with style
 
 Again a little care is needed.
 For example, if the `Button` class component is to be extended, its `render()` method must first be amended:
@@ -253,7 +253,7 @@ module.exports = withStyle(MainButton)`
 `;
 ```
 
-### Retrieving class names
+## Retrieving class names
 
 There is no great secret to the `retrieveClassName()` function, by the way.
 Elements in the virtual DOM keep references to their corresponding components in order to call their lifecycle methods, for one thing.
@@ -269,7 +269,7 @@ function retrieveClassName(element) {
 
 In order to avoid any confusion, you could choose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all bar the very slight overhead.
 
-### Composing components with style
+## Composing components with style
 
 This can be done in the usual way for both functional and class components.
 The example below uses the latter:
