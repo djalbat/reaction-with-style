@@ -1,7 +1,7 @@
 {
   "name": "reaction-with-style",
   "author": "James Smith",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "license": "MIT",
   "homepage": "https://github.com/djalbat/reaction-with-style",
   "description": "Programmatic styles for Reaction.",
@@ -10,6 +10,7 @@
     "url": "https://github.com/djalbat/reaction-with-style"
   },
   "dependencies": {
+    "hashids": "^1.2.2",
     "necessary": "^3.2.2",
     "occam-lexers": "^8.0.15",
     "occam-parsers": "^8.0.9",
