@@ -44,15 +44,11 @@ ReactDOM.render(
 );
 ```
 
-You must call the `renderStyles()` function *after* importing the view but *before* rendering it.
-Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself.
-Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before the `ReactDOM.render()` function.
+You must call the `renderStyles()` function *after* importing the view but *before* rendering it. Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself. Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before the `ReactDOM.render()` function.
 
 ## Creating primitive components with style
 
-All of the standard HTML elements are supported.
-For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file.
-You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
+All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file. You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
 
 ```js
 const Link = withStyle.a`
