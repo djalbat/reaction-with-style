@@ -1,14 +1,14 @@
 'use strict';
 
-const reaction = require('reaction');
+const reaction = require('reaction'),
+      stylesSupport = require('with-style');  ///
 
-const tagNames = require('./tagNames'),
-      stylesUtilities = require('./utilities/styles'),
-      classNameUtilities = require('./utilities/className');
+const { tagNames, classUtilities, stylesUtilities, classNameUtilities } = stylesSupport;
 
 const { React } = reaction,
-      { generateClassName } = classNameUtilities,
-      { generateStyle, retrieveStyle, retrieveStylesCSS } = stylesUtilities;
+      { isClass } = classUtilities,
+      { generateClassName, retrieveClassName } = classNameUtilities,
+      { renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
 function withStyle(ClassOrFunction) {
   return function() {
@@ -35,27 +35,6 @@ function withStyle(ClassOrFunction) {
 
     return ClassOrFunction;
   };
-}
-
-function renderStyles() {
-  const stylesCSS = retrieveStylesCSS(),
-        innerHTML = `
-        
-${stylesCSS}`,
-        headDOMElement = document.querySelector('head'),
-        styleDOMElement = document.createElement('style');
-
-  Object.assign(styleDOMElement, {
-    innerHTML
-  });
-
-  headDOMElement.appendChild(styleDOMElement);
-}
-
-function retrieveClassName(element) {
-  const { className } = element.reactFunction || element.reactComponent.constructor;
-
-  return className;
 }
 
 Object.assign(withStyle, {
@@ -90,21 +69,3 @@ tagNames.forEach(function(tagName) {
 });
 
 module.exports = withStyle;
-
-function isClass(argument) { return isSubclassOf(argument, React.Component); }  ///
-
-function isSubclassOf(argument, Class) {
-  let subclass = false;
-
-  if (argument.name === Class.name) {   ///
-    subclass = true;
-  } else {
-    argument = Object.getPrototypeOf(argument); ///
-
-    if (argument !== null) {
-      subclass = isSubclassOf(argument, Class);
-    }
-  }
-
-  return subclass;
-}
