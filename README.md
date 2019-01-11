@@ -66,9 +66,7 @@ const Link = withStyle.a`
 Now you are free to use the `Link` component in the usual way.
 
 Note that expression interpolation is supported.
-For example, here variables for colours and a breakpoint have been substituted into the template literal.
-Functions are also supported.
-If a function is encountered, it is executed and its return valued is utilised.
+For example, here colour and breakpoint variables have been used.
 
 To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
