@@ -1,9 +1,9 @@
 'use strict';
 
-const reaction = require('reaction'),
-      stylesSupport = require('with-style');  ///
+const style = require('with-style'),  ///
+      reaction = require('reaction');
 
-const { tagNames, classUtilities, stylesUtilities, classNameUtilities } = stylesSupport;
+const { tagNames, classUtilities, stylesUtilities, classNameUtilities } = style;
 
 const { React } = reaction,
       { isClass } = classUtilities,
