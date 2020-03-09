@@ -171,9 +171,29 @@ class NavigationButton extends Button {
   }
 }
 ```
-Note that because the `NavigationButton` class component has no style, the `className` property must be recovered from the `Button` component with style that has been extended.
+Note that because the `NavigationButton` class component has no style here, the `className` property can only be recovered from the `Button` component with style that has been extended.
 
-If you were to subsequently style 
+If you were to subsequently style the component, however...
+
+```js
+export default withStyle(NavigationButton)`
+
+  ...
+  
+`;
+```
+...you could now make use of the style in the `render()` method thus:
+
+```js
+class NavigationButton extends Button {
+  render(update) {
+    const { className } = this.props;
+
+    ...
+  }
+}
+```
+You cannot quite have your cake and eat it, however, because you cannot now use the `NavigationButton` component. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
 
 ## An example of functional classes
 

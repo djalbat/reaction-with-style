@@ -39,9 +39,6 @@ const bodyDOMElement = document.querySelector('body');
 ReactDOM.render(
 
     <div>
-      <Paragraph>
-        Now also working!
-      </Paragraph>
       <ExampleParagraph>
         What about this?
       </ExampleParagraph>
