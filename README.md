@@ -156,9 +156,9 @@ const SubmitButton = withStyle(Button)`
 `;
 ```
 
-In each case both the original and new components with style will keep their own styles, with the former inheriting all the styles of the latter. 
+In each case both the original and new components with style will keep their own styles. The former will inherit all the styles of the latter in each case and can override them as necessary. 
 
-## Class components with style and inheritance
+## Class components with style and class inheritance
 
 It is perfectly permissible to extend class components with style. If you extend a class component with style without applying any further styling, however, you need to be careful if you overload its `rendder()` method:  
 
@@ -172,65 +172,6 @@ class NavigationButton extends Button {
 }
 ```
 Note that because the NavigationButton has no style, the `className` property must be recovered from the `Button` subclass.
-
-
-
-Again a little care is needed.
-For example, if the `Button` class component is to be extended, its `render()` method must first be amended:
-```js
-const { retrieveClassName } = withStyle;
-
-class Button extends React.Component {
-  render(update) {
-    const className = retrieveClassName(this),
-          ...
-          ;
-
-    return (
-
-      ...
-
-    );
-  }
-}
-```
-Here you pass `this` to the `retrieveClassName()` function.
-Now you can extend the style of the `Button` class:
-
-
-If you want to do extend a component's functionality by way of class inheritance, as well as its style, you can do so:
-
-```js
-class MainButton extends Button {
-
-  ...
-
-}
-
-module.exports = withStyle(MainButton)`
-
-  ...
-
-`;
-```
-Whether the `render()` method is in the class being extended or the class doing the extending, so to speak, it must utilise the `retrieveClassName()` function.
-For example, the `MainButton` class below contains a new `render()` method that overrides the one in the `Button` class, with the `retrieveClassName()` function still being used:
-
-```js
-class MainButton extends Button {
-  render(update) {
-    const className = retrieveClassName(this),
-          ...
-          ;
-
-    return (
-
-      ...
-
-    );
-  }
-}
-```
 
 ## An example of functional classes
 
