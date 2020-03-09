@@ -7,7 +7,7 @@ const { isClass } = classUtilities,
       { generateClassName, retrieveClassName } = classNameUtilities,
       { renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
-export default function withStyle(ClassOrFunction) {
+function withStyle(ClassOrFunction) {
   return function() {
     const args = [...arguments];  ///
 
@@ -54,6 +54,8 @@ Object.assign(withStyle, {
   renderStyles,
   retrieveClassName
 });
+
+export default withStyle;
 
 tagNames.forEach(function(tagName) {
   Object.defineProperty(withStyle, tagName, {
