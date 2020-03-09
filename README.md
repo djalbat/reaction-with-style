@@ -182,7 +182,7 @@ export default withStyle(NavigationButton)`
   
 `;
 ```
-...you could now make use of the style in the `render()` method thus:
+...you would now make use of the style in the `render()` method conventionally thus:
 
 ```js
 class NavigationButton extends Button {
@@ -193,12 +193,12 @@ class NavigationButton extends Button {
   }
 }
 ```
-You cannot quite have your cake and eat it, however, because you cannot now use the `NavigationButton` component. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
+Unfortunately you cannot quite have your cake and eat it, because you cannot now use the `NavigationButton` component. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
 
 ## An example of functional classes
 
 Programmatic styles are great for working with classes that relate directly to a component's functionality as opposed to just to appearances.
-In the example below, the usual `React.Component` class has been extended to provide a component that can be programmatically displayed and hidden:
+In the example below, the component can be programmatically displayed and hidden:
 
 ```js
 class Component extends React.Component {}
@@ -243,6 +243,34 @@ function isDisplayed() {
   return displayed;
 }
 ```
+
+## Placeholder class names
+
+Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore:
+
+```js
+const MainHeader = (props) => {
+  const { className } = props;
+
+  return (
+
+    <header className={`${className} main`}>
+
+      ...
+
+    </header>
+
+  );
+};
+
+export default withStyle(MainHeader)`
+
+  ...
+
+`;
+```
+
+This makes the identification of HTML elements in your browser's developer tools with their corresponding components far easier. 
 
 ## Compiling from source
 
