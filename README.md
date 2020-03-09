@@ -76,7 +76,7 @@ This can be done with the `withStyle()` function, which effectively acts as a hi
 
 ```js
 const Header = (props) => {
-  const { className } = Header;
+  const { className } = props;
 
   return (
 
@@ -96,9 +96,7 @@ module.exports = withStyle(Header)`
 `;
 ```
 
-In this case the `withStyle()` function will simply return the function that you pass to it.
-The only discernible change it makes is to assign a `className` property, which is the name of the CSS class generated for the component.
-You must retrieve this property and pass it as an attribute to the outermost JSX element that the function returns.
+Note that the `className` property is retrieved from the `props` object and must be used as the value of the attribute of the same name on the outermost JSX element that the function returns.
 
 ## Creating class components with style
 
@@ -107,7 +105,7 @@ The process is much the same as for functional components:
 ```js
 class Button extends React.Component {
   render(update) {
-    const { className } = Button,
+    const { className } = this.props,
           ...
           ;
 
@@ -130,7 +128,7 @@ module.exports = withStyle(AccordionButton)`
 `;
 ```
 
-Here, not unsurprisingly, you must destructure the class in order to get hold of the requisite `className` property.
+Again the requisite `className` property is recovered, this time from the `this.props` object.
 
 ## Extending primitive components with style
 

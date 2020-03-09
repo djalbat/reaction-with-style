@@ -1,33 +1,46 @@
 'use strict';
 
-const style = require('with-style'),  ///
-      reaction = require('reaction');
+import { React } from 'reaction';
+import { tagNames, classUtilities, stylesUtilities, classNameUtilities } from 'with-style';
 
-const { tagNames, classUtilities, stylesUtilities, classNameUtilities } = style;
-
-const { React } = reaction,
-      { isClass } = classUtilities,
+const { isClass } = classUtilities,
       { generateClassName, retrieveClassName } = classNameUtilities,
       { renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
-function withStyle(ClassOrFunction) {
+export default function withStyle(ClassOrFunction) {
   return function() {
     const args = [...arguments];  ///
 
-    let superStyle = null,
-        { className } = ClassOrFunction;
+    let { className } = ClassOrFunction;
 
-    if (className) {
-      ClassOrFunction = isClass(ClassOrFunction) ?
-                          class extends ClassOrFunction {} : ///
-                            ClassOrFunction.bind({}); ///
-
-      superStyle = retrieveStyle(className);
-    }
+    const superStyle = retrieveStyle(className);
 
     className = generateClassName();
 
     generateStyle(args, className, superStyle);
+
+    const ClassOrFunctionClass = isClass(ClassOrFunction);
+
+    if (ClassOrFunctionClass) {
+      const Class = ClassOrFunction;  ///
+
+      ClassOrFunction = class extends Class {
+
+        render(update) {
+          this.props = appendClassNameToProps(className, this.props);
+
+          return super.render(update);
+        }
+      };
+    } else {
+      const Function = ClassOrFunction; ///
+
+      ClassOrFunction = (props, context, element) => {
+        props = appendClassNameToProps(className, props);
+
+        return Function(props, context, element);
+      };
+    }
 
     Object.assign(ClassOrFunction, {
       className
@@ -51,10 +64,9 @@ tagNames.forEach(function(tagName) {
       generateStyle(args, className);
 
       const Function = (props, context, element) => {
-        const className = retrieveClassName(element),
-              { children } = props;
+        const { children } = props;
 
-        props.className = `${className} ${props.className || ''}`;	///
+        props = appendClassNameToProps(className, props);
 
         return React.createElement(tagName, props, ...children);
       };
@@ -68,4 +80,8 @@ tagNames.forEach(function(tagName) {
   });
 });
 
-module.exports = withStyle;
+function appendClassNameToProps(className, props) {
+  props = props.hasOwnProperty('className') ? props : {...props, className}; ///
+
+  return props;
+}
