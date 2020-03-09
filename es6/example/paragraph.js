@@ -12,9 +12,9 @@ class Paragraph extends Component {
 
     return (
 
-      <section className={className}>
+      <p className={className}>
         {children}
-      </section>
+      </p>
 
     );
   };

@@ -171,7 +171,9 @@ class NavigationButton extends Button {
   }
 }
 ```
-Note that because the NavigationButton has no style, the `className` property must be recovered from the `Button` subclass.
+Note that because the `NavigationButton` class component has no style, the `className` property must be recovered from the `Button` subclass.
+
+If you were to subsequently style 
 
 ## An example of functional classes
 

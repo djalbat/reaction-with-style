@@ -6,36 +6,27 @@ import { React, ReactDOM } from 'reaction';
 
 window.React = React; ///
 
-import Link from './example/link';
-import Section from './example/section';
 import Paragraph from './example/paragraph';
 
-const ExampleLink = withStyle(Link)`
-
-  color: green;
-  background: lightyellow;
-
-`;
-
 class ExampleParagraph extends Paragraph {
-  ...
+  render(update) {
+    const { className } = this.props;
+
+    const { children } = this.props;
+
+    return (
+
+      <p className={className}>
+        {children}
+      </p>
+
+    );
+  }
 }
 
 const StyledExampleParagraph = withStyle(ExampleParagraph)`
 
-  color: black;
-  
-`;
-
-
-// const ExampleParagraph = withStyle(Paragraph)`
-//
-//   color: red;
-// `;
-
-const ExampleSection = withStyle(Section)`
-
-  color: green;
+  color: red;
   
 `;
 
@@ -48,21 +39,12 @@ const bodyDOMElement = document.querySelector('body');
 ReactDOM.render(
 
     <div>
-      <ExampleLink>
-        Working!
-      </ExampleLink>
-      <Link>
-        Yes!
-      </Link>
-      <Section>
-        Working!
-      </Section>
-      <ExampleSection>
-        Also working!
-      </ExampleSection>
       <Paragraph>
         Now also working!
       </Paragraph>
+      <ExampleParagraph>
+        What about this?
+      </ExampleParagraph>
       <StyledExampleParagraph>
         This is working?
       </StyledExampleParagraph>
