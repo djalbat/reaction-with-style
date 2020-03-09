@@ -147,25 +147,7 @@ The `HeaderLink` component will of course have all of the `Link` component's sty
 
 ## Extending functional components with style
 
-In these cases a little care is needed.
-Rather than destructuring the function to get hold of the `className` property, you must make use of the `retrieveClassName()` function.
-For example, if the `Header` functional component is to be extended, it must first be amended in a similar fashion to functional components:
-
-```js
-const { retrieveClassName } = withStyle;
-
-const Header = (props, context, element) => {
-  const className = retrieveClassName(element);
-
-  return (
-
-    ...
-
-  );
-};
-```
-Note that the arguments now include a third `element` argument which must be passed to the `retrieveClassName()` function.
-Now the component can be extended:
+Again this is straightforward:
 
 ```js
 const MainHeader = withStyle(Header)`
@@ -174,6 +156,8 @@ const MainHeader = withStyle(Header)`
 
 `;
 ```
+
+Again both the `Header` and `MainHeader` components will keep their individual styles.
 
 ## Extending class components with style
 
