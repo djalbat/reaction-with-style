@@ -17,7 +17,9 @@ const ExampleLink = withStyle(Link)`
 
 `;
 
-class ExampleParagraph extends Paragraph {}
+class ExampleParagraph extends Paragraph {
+  ...
+}
 
 const StyledExampleParagraph = withStyle(ExampleParagraph)`
 
@@ -25,13 +27,6 @@ const StyledExampleParagraph = withStyle(ExampleParagraph)`
   
 `;
 
-// class ExampleParagraph extends Paragraph {
-//   render(update) {
-//     const { className } = Paragraph;
-//
-//     debugger
-//   }
-// }
 
 // const ExampleParagraph = withStyle(Paragraph)`
 //

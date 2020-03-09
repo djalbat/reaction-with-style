@@ -105,9 +105,7 @@ The process is much the same as for functional components:
 ```js
 class Button extends React.Component {
   render(update) {
-    const { className } = this.props,
-          ...
-          ;
+    const { className } = this.props;
 
     return (
 
@@ -130,10 +128,9 @@ module.exports = withStyle(AccordionButton)`
 
 Again the requisite `className` property is recovered, this time from the `this.props` object.
 
-## Extending primitive components with style
+## Extending the styles of components with style
 
-Primitive components can be extended easily.
-For example, the `Link` component above can be extended as follows:
+This is straightforward for all primitive, functional and class components:
 
 ```js
 const HeaderLink = withStyle(Link)`
@@ -142,12 +139,6 @@ const HeaderLink = withStyle(Link)`
 
 `;
 ```
-Now both `Link` and `HeaderLink` components are available, each with their own associated style.
-The `HeaderLink` component will of course have all of the `Link` component's style and may override it as necessary.
-
-## Extending functional components with style
-
-Again this is straightforward:
 
 ```js
 const MainHeader = withStyle(Header)`
@@ -157,9 +148,32 @@ const MainHeader = withStyle(Header)`
 `;
 ```
 
-Again both the `Header` and `MainHeader` components will keep their individual styles.
+```js
+const SubmitButton = withStyle(Button)`
 
-## Extending class components with style
+  ...
+
+`;
+```
+
+In each case both the original and new components with style will keep their own styles, with the former inheriting all the styles of the latter. 
+
+## Class components with style and inheritance
+
+It is perfectly permissible to extend class components with style. If you extend a class component with style without applying any further styling, however, you need to be careful if you overload its `rendder()` method:  
+
+```js
+class NavigationButton extends Button {
+  render(update) {
+    const { className } = Button;
+
+    ...
+  }
+}
+```
+Note that because the NavigationButton has no style, the `className` property must be recovered from the `Button` subclass.
+
+
 
 Again a little care is needed.
 For example, if the `Button` class component is to be extended, its `render()` method must first be amended:
@@ -183,13 +197,6 @@ class Button extends React.Component {
 Here you pass `this` to the `retrieveClassName()` function.
 Now you can extend the style of the `Button` class:
 
-```js
-const MainButton = withStyle(Button)`
-
-  ...
-
-`;
-```
 
 If you want to do extend a component's functionality by way of class inheritance, as well as its style, you can do so:
 
@@ -223,154 +230,7 @@ class MainButton extends Button {
     );
   }
 }
-
-module.exports = withStyle(MainButton)`
-
-  ...
-
-`;
 ```
-
-## Retrieving class names
-
-There is no great secret to the `retrieveClassName()` function, by the way.
-Elements in the virtual DOM keep references to their corresponding components in order to call their lifecycle methods, for one thing.
-The `retrieveClassName()` function simply makes use of this reference in order to destructure the right component function or class:
-
-```js
-function retrieveClassName(element) {
-  const { className } = element.reactFunction || element.reactComponent.constructor;
-
-  return className;
-}
-```
-
-In order to avoid any confusion, you could choose to always use the `retrieveClassName()` function regardless of whether any particular component is being extended or not, and this would do no harm at all bar the very slight overhead.
-
-## Composing components with style
-
-This can be done in the usual way for both functional and class components.
-The example below uses the latter:
-
-```js
-class MainButton extends React.Component {
-  render(update) {
-    return (
-
-      <Button>
-        ...
-      </Button>
-
-    );
-  }
-}
-
-module.exports = MainButton;
-```
-
-Note, however, that the `MainButton` class itself is exported without style.
-If you were to do otherwise, you would have to set the `className` attribute of the inner `Button` component and in doing so you would rob it of its own style.
-It is possible to write components in such as way as to overcome this but doing so is not recommended.
-Instead, you should style the child component locally, so to speak:
-
-```js
-class MainButton extends React.Component {
-  render(update) {
-    return (
-
-      <ChildButton>
-        ...
-      </ChildButton>
-
-    );
-  }
-}
-
-module.exports = MainButton;
-
-const ChildButton = withStyle(Button)`
-
-  ...
-
-`;
-```
-
-Now the `Button` component's original styles will be preserved.
-
-## Placeholder class names
-
-Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging.
-It is best to add your own placeholder class names, therefore, to make the identification of HTML elements in your browser's developer tools with their corresponding components easier.
-For example:
-
-```js
-const MainHeader = (props) => {
-  const { className } = MainHeader;
-
-  return (
-
-    <header className={`${className} main`}>
-
-      ...
-
-    </header>
-
-  );
-};
-
-module.exports = withStyle(MainHeader)`
-
-  ...
-
-`;
-```
-
-When using composition, you might want to consider writing your components, whether functional or class based, to make use of any placeholder class names that they have been passed.
-Here, for example, a `Header` component is being used:
-
-```js
-const MainHeader = (props) => {
-  return (
-
-    <Header className="main">
-
-      ...
-
-    </Header>
-
-  );
-};
-
-module.exports = MainHeader;
-```
-
-Note that because composition is being used, you cannot style with outermost `MainHeader` component anymore.
-You should pass down only a placeholder class name and not a class name generated as a result of adding style.
-Here is the `Header` component itself:
-
-```js
-const Header = (props) => {
-  const { className } = Header;
-
-  return (
-
-    <header className={`${className} ${props.className || ''}`}>
-
-      ...
-
-    </header>
-
-  );
-};
-
-module.exports = withStyle(Header)`
-
-  ...
-
-`;
-```
-
-You can choose to augment the value of the `className` attribute directly in this way, this is what the built-in primitive components do, or you could write your own `retrieveClassName()` function and pass the `props` object as a second parameter.
 
 ## An example of functional classes
 
