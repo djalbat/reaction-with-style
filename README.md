@@ -2,7 +2,7 @@
 
 Programmatic styles for [Reaction](https://github.com/djalbat/reaction).
 
-This package was inspired by [styled-components](https://www.styled-components.com/). It is to Reaction what styled components are to React, although there are differences.
+This package was inspired by [styled-components](https://www.styled-components.com/). It is to Reaction what styled-components are to React, although there are differences.
 
 To find out what variant of CSS is supported, which is essential to know, please read the [With Style](https://github.com/djalbat/with-style) readme file.
 
@@ -23,13 +23,13 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 ## Usage
 
 ```js
-const reaction = require('reaction'),
-      withStyle = require('reaction-with-style');   ///
+import withStyle from 'reaction-with-style';   ///
 
-const { ReactDOM } = reaction,
-      { renderStyles } = withStyle;
+import { ReactDOM } from 'reaction';
 
-const View = require('./view');
+import View from './view';
+
+const { renderStyles } = withStyle;
 
 const bodyDOMElement = document.querySelector('body');
 
@@ -89,7 +89,7 @@ const Header = (props) => {
   );
 };
 
-module.exports = withStyle(Header)`
+export default withStyle(Header)`
 
   ...
 
@@ -119,7 +119,7 @@ class Button extends React.Component {
   }
 }
 
-module.exports = withStyle(AccordionButton)`
+export default withStyle(AccordionButton)`
 
   ...
 
@@ -212,7 +212,7 @@ Object.assign(Component, {
   ]
 });
 
-module.exports = withStyle(Component)`
+export default withStyle(Component)`
 
   .hidden {
 
