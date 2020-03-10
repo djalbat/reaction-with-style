@@ -245,7 +245,7 @@ This makes the identification of HTML elements in your browser's developer tools
 
 ## An example of functional classes
 
-Programmatic styles are great for working with classes that relate directly to a component's functionality as opposed to just to appearances.
+Components with style are great for working with styles that relate directly to a component's functionality as opposed to just its appearance.
 In the example below, the component can be programmatically displayed and hidden:
 
 ```js
