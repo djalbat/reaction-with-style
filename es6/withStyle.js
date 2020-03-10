@@ -25,7 +25,6 @@ function withStyle(ClassOrFunction) {
       const Class = ClassOrFunction;  ///
 
       ClassOrFunction = class extends Class {
-
         render(update) {
           this.props = appendClassNameToProps(className, this.props);
 
