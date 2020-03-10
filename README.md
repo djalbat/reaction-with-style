@@ -109,7 +109,7 @@ class Button extends React.Component {
 
     return (
 
-      <button className={className} ...>
+      <button className={className}>
 
         ...
 
@@ -156,7 +156,27 @@ const SubmitButton = withStyle(Button)`
 `;
 ```
 
-In each case both the original and new components with style will keep their own styles. The former will inherit all the styles of the latter in each case and can override them as necessary. 
+In each case both the original and new components with style will keep their own styles. The former will inherit all the styles of the latter in each case and can override them as necessary.
+
+## Components with style and composition
+
+Composing components with style obviously causes no problems, aside from one small caveat. If you set the `className` property of a component with style, then you will overwrite the class name that has been given to it automatically. In the case of all components with style, however, it is easy to recover the class name and incorporate it into your own:
+
+```js
+const NavigationButton = (props) => {
+  const { className } = Button,
+        { children } = props;
+
+  return (
+    
+    <Button className={`${className} navigation`}>
+      {children}
+    </Button>
+    
+  );  
+}
+```
+This situation arise when using placeholder class names, see below.
 
 ## Class components with style and class inheritance
 
