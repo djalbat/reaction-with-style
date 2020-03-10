@@ -81,7 +81,9 @@ tagNames.forEach(function(tagName) {
 });
 
 function appendClassNameToProps(className, props) {
-  props = props.hasOwnProperty('className') ? props : {...props, className}; ///
+  className = props.className ? `${props.className} ${className}` : className;
+
+  props = {...props, className};
 
   return props;
 }
