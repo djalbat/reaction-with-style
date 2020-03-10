@@ -193,7 +193,7 @@ class NavigationButton extends Button {
   }
 }
 ```
-Unfortunately you cannot quite have your cake and eat it, meaning that you cannot now use the `NavigationButton` component without style, because it's `render()` method expects it. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
+Unfortunately you cannot quite have your cake and eat it, meaning that you cannot now use the `NavigationButton` component without its own style style, so to speak, because it's `render()` method now expects it. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
 
 ## An example of functional classes
 
