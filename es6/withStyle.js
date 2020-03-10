@@ -4,7 +4,7 @@ import { React } from 'reaction';
 import { tagNames, classUtilities, stylesUtilities, classNameUtilities } from 'with-style';
 
 const { isClass } = classUtilities,
-      { generateClassName, retrieveClassName } = classNameUtilities,
+      { generateClassName } = classNameUtilities,
       { renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
 function withStyle(ClassOrFunction) {
@@ -50,8 +50,7 @@ function withStyle(ClassOrFunction) {
 }
 
 Object.assign(withStyle, {
-  renderStyles,
-  retrieveClassName
+  renderStyles
 });
 
 export default withStyle;
