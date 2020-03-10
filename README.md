@@ -215,6 +215,34 @@ class NavigationButton extends Button {
 ```
 Unfortunately you cannot quite have your cake and eat it, meaning that you cannot now use the `NavigationButton` component without its own style style, so to speak, because it's `render()` method now expects it. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
 
+## Placeholder class names
+
+Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore:
+
+```js
+const MainHeader = (props) => {
+  const { className } = props;
+
+  return (
+
+    <header className={`${className} main`}>
+
+      ...
+
+    </header>
+
+  );
+};
+
+export default withStyle(MainHeader)`
+
+  ...
+
+`;
+```
+
+This makes the identification of HTML elements in your browser's developer tools with their corresponding components far easier. 
+
 ## An example of functional classes
 
 Programmatic styles are great for working with classes that relate directly to a component's functionality as opposed to just to appearances.
@@ -263,34 +291,6 @@ function isDisplayed() {
   return displayed;
 }
 ```
-
-## Placeholder class names
-
-Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore:
-
-```js
-const MainHeader = (props) => {
-  const { className } = props;
-
-  return (
-
-    <header className={`${className} main`}>
-
-      ...
-
-    </header>
-
-  );
-};
-
-export default withStyle(MainHeader)`
-
-  ...
-
-`;
-```
-
-This makes the identification of HTML elements in your browser's developer tools with their corresponding components far easier. 
 
 ## Compiling from source
 
