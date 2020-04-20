@@ -1,5 +1,5 @@
-'use strict';
+"use strict";
 
-import withStyle from './withStyle';
+import withStyle from "./withStyle";
 
 export default withStyle;

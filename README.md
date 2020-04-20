@@ -22,7 +22,7 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-```js
+```
 import withStyle from 'reaction-with-style';   ///
 
 import { ReactDOM } from 'reaction';
@@ -50,7 +50,7 @@ You must call the `renderStyles()` function *after* importing the view but *befo
 
 All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file. You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
 
-```js
+```
 const Link = withStyle.a`
 
   color: ${white};
@@ -74,7 +74,7 @@ To learn more about template literals in general and expression interpolation in
 
 This can be done with the `withStyle()` function, which effectively acts as a higher order component:
 
-```js
+```
 const Header = (props) => {
   const { className } = props;
 
@@ -102,7 +102,7 @@ Note that the `className` property is retrieved from the `props` object and must
 
 The process is much the same as for functional components:
 
-```js
+```
 class Button extends React.Component {
   render(update) {
     const { className } = this.props;
@@ -132,7 +132,7 @@ Again the requisite `className` property is recovered, this time from the `this.
 
 This is straightforward for all primitive, functional and class components:
 
-```js
+```
 const HeaderLink = withStyle(Link)`
 
   ...
@@ -140,7 +140,7 @@ const HeaderLink = withStyle(Link)`
 `;
 ```
 
-```js
+```
 const MainHeader = withStyle(Header)`
 
   ...
@@ -148,7 +148,7 @@ const MainHeader = withStyle(Header)`
 `;
 ```
 
-```js
+```
 const SubmitButton = withStyle(Button)`
 
   ...
@@ -162,7 +162,7 @@ In each case both the original and new components with style will keep their own
 
 Composing components with style obviously causes no problems in general, aside from one small caveat. If you set the `className` property of a component with style, then you will overwrite the class name that has been given to it automatically. In the case of all components with style, however, it is easy to recover the class name and incorporate it into your own:
 
-```js
+```
 const NavigationButton = (props) => {
   const { className } = Button,
         { children } = props;
@@ -182,7 +182,7 @@ This situation occasionally arises when using placeholder class names, see below
 
 It is perfectly permissible to extend class components with style. If you extend a class component with style without applying any further styling, however, you need to be careful if you overload its `rendder()` method:  
 
-```js
+```
 class NavigationButton extends Button {
   render(update) {
     const { className } = Button;
@@ -195,7 +195,7 @@ Note that because the `NavigationButton` class component has no style, the `clas
 
 If you were to subsequently style the component, however...
 
-```js
+```
 export default withStyle(NavigationButton)`
 
   ...
@@ -204,7 +204,7 @@ export default withStyle(NavigationButton)`
 ```
 ...you would now make use of the style in the `render()` method conventionally thus:
 
-```js
+```
 class NavigationButton extends Button {
   render(update) {
     const { className } = this.props;
@@ -219,7 +219,7 @@ Unfortunately you cannot quite have your cake and eat it, meaning that you canno
 
 Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore:
 
-```js
+```
 const MainHeader = (props) => {
   const { className } = props;
 
@@ -248,7 +248,7 @@ This makes the identification of HTML elements in your browser's developer tools
 Components with style are great for working with styles that relate directly to a component's functionality as opposed to just its appearance.
 In the example below, the component can be programmatically displayed and hidden:
 
-```js
+```
 class Component extends React.Component {}
 
 Object.assign(Component, {

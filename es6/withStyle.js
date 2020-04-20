@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-import { React } from 'reaction';
-import { tagNames, classUtilities, stylesUtilities, classNameUtilities } from 'with-style';
+import { React } from "reaction";
+import { tagNames, classUtilities, stylesUtilities, classNameUtilities } from "with-style";
 
 const { isClass } = classUtilities,
       { generateClassName } = classNameUtilities,
@@ -55,7 +55,7 @@ Object.assign(withStyle, {
 
 export default withStyle;
 
-tagNames.forEach(function(tagName) {
+tagNames.forEach((tagName) => {
   Object.defineProperty(withStyle, tagName, {
     get: () => function() {
       const args = [...arguments],  ///
@@ -81,7 +81,7 @@ tagNames.forEach(function(tagName) {
 });
 
 function appendClassNameToProps(className, props) {
-  props = props.hasOwnProperty('className') ? props : {...props, className}; ///
+  props = props.hasOwnProperty("className") ? props : {...props, className}; ///
 
   return props;
 }
