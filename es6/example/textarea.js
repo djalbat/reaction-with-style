@@ -12,7 +12,7 @@ class Textarea extends Component {
     setValue,
     getValue,
     showError,
-    hideError,
+    hideError
   ];
 
   componentDidMount() {
@@ -45,22 +45,10 @@ export default withStyle(Textarea)`
 `;
 
 function onKeyUp(keyUpHandler) {
-  this.domElement.addEventListener("keyup", () => {
-    const value = this.getValue();
-
-    keyUpHandler(value);
+  this.domElement.addEventListener("keyup", (event) => {
+    keyUpHandler(event);
   });
 }
-
-export function onChange(changeHandler) {
-  this.domElement.addEventListener("input", () => {
-    const value = this.getValue();
-
-    changeHandler(value);
-  });
-
-}
-
 
 function setValue(value) {
   this.domElement.value = value;
