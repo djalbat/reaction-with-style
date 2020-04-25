@@ -1,10 +1,11 @@
 "use strict";
 
 import { React } from "reaction";
-import { tagNames, classUtilities, stylesUtilities, classNameUtilities } from "with-style";
+import { tagNames, stylesUtilities, classNameUtilities } from "with-style";
 
-const { isClass } = classUtilities,
-      { generateClassName } = classNameUtilities,
+import { isClass } from "./utilities/class";
+
+const { generateClassName } = classNameUtilities,
       { renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
 function withStyle(ClassOrFunction) {

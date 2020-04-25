@@ -180,7 +180,7 @@ This situation occasionally arises when using placeholder class names, see below
 
 ## Class components with style and class inheritance
 
-It is perfectly permissible to extend class components with style. If you extend a class component with style without applying any further styling, however, you need to be careful if you overload its `rendder()` method:  
+It is perfectly permissible to extend class components with style. If you extend a class component with style without applying any further styling, however, you need to be careful if you overload its `render()` method:
 
 ```
 class NavigationButton extends Button {
