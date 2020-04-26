@@ -4,71 +4,126 @@ import withStyle from "../index";  ///
 
 import { React } from "reaction";
 
+import cursor from "./cursor";
+
+import { getPreviousSibling } from "../utilities/sibling";
+
 const { Component } = React;
 
 class VerticalSplitter extends Component {
   static mixins = [
-    isDragging,
+    mouseUpHandler,
+    mouseMoveHandler,
+    mouseDownHandler,
+    mouseOverHandler,
+    mouseOutHandler,
     startDragging,
     stopDragging,
-    onKeyDown,
-    onMouseUp,
-    onMouseDown,
-    onMouseMove,
-    onMouseOver,
-    onMouseOut
+    isDragging
   ];
+
+  componentDidMount() {
+    const previousSibling = getPreviousSibling(this),
+          sizeableDiv = previousSibling;  ///
+
+    this.sizeableDiv = sizeableDiv;
+
+    window.addEventListener("mouseup", this.mouseUpHandler);
+
+    window.addEventListener("mousemove", this.mouseMoveHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("mousemove", this.mouseMoveHandler);
+
+    window.removeEventListener("mouseup", this.mouseUpHandler);
+
+    delete this.sizeableDiv;
+  }
+
+  render(update) {
+    const { className } = this.props;
+
+    return (
+
+      <div className={`${className} vertical-splitter`}
+           onMouseDown={this.mouseDownHandler}
+           onMouseOver={this.mouseOverHandler}
+           onMouseOut={this.mouseOutHandler}
+      />
+
+    );
+  }
 }
 
 export default withStyle(VerticalSplitter)`
 
-  width: 0.8rem;
+  width: 0.5rem;
   flex-shrink: 0;
+  background-color: lightgrey;
 
 `;
+
+function mouseUpHandler() {
+  const dragging = this.isDragging();
+
+  if (dragging) {
+    this.stopDragging();
+  }
+
+  cursor.reset();
+}
+
+function mouseMoveHandler(event) {
+  const dragging = this.isDragging();
+
+  if (dragging) {
+    const mouseLeft = event.pageX,  ///
+          relativeMouseLeft = mouseLeft - this.previousMouseLeft,
+          sizeableDivWidth = this.previousSizeableDivWidth + relativeMouseLeft,
+          width = sizeableDivWidth; ///
+
+    this.sizeableDiv.setWidth(width);
+  }
+}
+
+function mouseDownHandler(event) {
+  const dragging = this.isDragging();
+
+  if (!dragging) {
+    const mouseLeft = event.pageX,  ///
+          sizeableDivWidth = this.sizeableDiv.getWidth(),
+          previousMouseLeft = mouseLeft,  ///
+          previousSizeableDivWidth = sizeableDivWidth;   ///
+
+    this.previousMouseLeft = previousMouseLeft;
+
+    this.previousSizeableDivWidth = previousSizeableDivWidth;
+
+    this.startDragging();
+  }
+
+  cursor.columnResize();
+}
+
+function mouseOverHandler() {
+  cursor.columnResize();
+}
+
+function mouseOutHandler() {
+  cursor.reset();
+}
+
+function startDragging() {
+  this.addClass('dragging');
+}
+
+function stopDragging() {
+  this.removeClass('dragging');
+}
 
 function isDragging() {
   const dragging = this.hasClass('dragging');
 
   return dragging;
-}
-
-function startDragging() {
-  this.onKeyDown(this.keyDownHandler, this);
-
-  this.addClass('dragging');
-
-  this.startDraggingHandler();
-}
-
-function stopDragging() {
-  this.offKeyDown(this.keyDownHandler, this);
-
-  this.removeClass('dragging');
-
-  this.stopDraggingHandler();
-}
-
-function onKeyDown(keyDownHandler) {
-  window.addEventListener("keydown", keyDownHandler);
-}
-
-function onMouseUp(mouseUpHandler) {
-  window.addEventListener('mouseup blur', mouseUpHandler);
-}
-
-function onMouseDown(mouseDownHandler) {
-  window.addEventListener("mousedown", mouseDownHandler);
-}
-
-function onMouseMove(mouseMoveHandler) {
-  window.addEventListener("mousemove", mouseMoveHandler);
-}
-
-function onMouseOver(mouseOverHandler) {
-  this.domElement.addEventListener("mouseover", mouseOverHandler);
-}
-
-function onMouseOut(mouseOutHandler) {
-  this.domElement.addEventListener("mouseout", mouseOutHandler);
 }
