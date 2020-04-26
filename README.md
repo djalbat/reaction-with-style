@@ -2,8 +2,6 @@
 
 Programmatic styles for [Reaction](https://github.com/djalbat/reaction).
 
-This package was inspired by [styled-components](https://www.styled-components.com/). It is to Reaction what styled-components are to React, although there are differences.
-
 To find out what variant of CSS is supported, which is essential to know, please read the [With Style](https://github.com/djalbat/with-style) readme file.
 
 ## Installation
