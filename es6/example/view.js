@@ -112,11 +112,9 @@ function keyUpHandler() {
   try {
     const parseTree = this.getParseTree();
 
-    this.contentTextarea.hideError();
-
     this.parseTreeTextarea.setParseTree(parseTree);
   } catch (error) {
-    this.contentTextarea.showError();
+    console.log(error);
 
     this.parseTreeTextarea.clearParseTree();
   }

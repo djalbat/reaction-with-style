@@ -10,9 +10,7 @@ class Textarea extends Component {
   static mixins = [
     onKeyUp,
     setValue,
-    getValue,
-    showError,
-    hideError
+    getValue
   ];
 
   componentDidMount() {
@@ -37,10 +35,6 @@ export default withStyle(Textarea)`
   resize: vertical;
   white-space: pre;
   margin-top: 0.5rem;
-  
-  .error {
-    border-color: red;
-  }
 
 `;
 
@@ -58,12 +52,4 @@ function getValue() {
   const value = this.domElement.value;
 
   return value;
-}
-
-function showError() {
-  this.addClass("error");
-}
-
-function hideError() {
-  this.removeClass("error");
 }
