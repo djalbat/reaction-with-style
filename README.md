@@ -219,7 +219,7 @@ Unfortunately you cannot quite have your cake and eat it, meaning that you canno
 
 ## Placeholder class names
 
-Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore:
+Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names. For example:
 
 ```
 const MainHeader = (props) => {
