@@ -34,6 +34,7 @@ class SizeableDiv extends Component {
 export default withStyle(SizeableDiv)`
 
   width: 50%;
+  padding-left: 1rem;
   padding-right: 1rem;
 
 `;

@@ -21,4 +21,3 @@ export default withStyle(ColumnsDiv)`
   flex-direction: row;
 
 `;
-

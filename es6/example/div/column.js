@@ -24,4 +24,3 @@ export default withStyle(ColumnDiv)`
   padding-right: 1rem;
 
 `;
-
