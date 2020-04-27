@@ -17,15 +17,15 @@ class SizeableDiv extends Component {
 
     return (
 
-        <div className={`${className} sizeable`}
-             ref={(domElement) => {
+      <div className={`${className} sizeable`}
+           ref={(domElement) => {
 
-               this.domElement = domElement;
+             this.domElement = domElement;
 
-             }}
-        >
-          {children}
-        </div>
+           }}
+      >
+        {children}
+      </div>
 
     );
   }
