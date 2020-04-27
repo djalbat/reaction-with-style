@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import { React } from 'reaction';
+import { React } from "reaction";
 
 export function isClass(argument) { return isSubclassOf(argument, React.Component); }  ///
 

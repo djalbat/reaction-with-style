@@ -115,15 +115,15 @@ function mouseOutHandler() {
 }
 
 function startDragging() {
-  this.addClass('dragging');
+  this.addClass("dragging");
 }
 
 function stopDragging() {
-  this.removeClass('dragging');
+  this.removeClass("dragging");
 }
 
 function isDragging() {
-  const dragging = this.hasClass('dragging');
+  const dragging = this.hasClass("dragging");
 
   return dragging;
 }

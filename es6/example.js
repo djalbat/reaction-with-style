@@ -10,14 +10,24 @@ const { renderStyles } = withStyle;
 
 window.React = React; ///
 
+const Paragraph = withStyle.p`
+
+  color: red;
+  
+`;
+
 renderStyles();
 
 const bodyDOMElement = document.querySelector("body");
 
+const { className } = Paragraph;
+
 ReactDOM.render(
 
-      <View />
+    <Paragraph className={`${className} blah`}>
+      Just testing...
+    </Paragraph>
 
-    ,
-    bodyDOMElement
+  ,
+  bodyDOMElement
 );
