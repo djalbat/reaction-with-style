@@ -16,6 +16,8 @@ class ParseTreeTextarea extends Textarea {
     return (
 
       <textarea className={`${className} parse-tree`}
+                spellCheck="false"
+                readOnly
                 ref={(domElement) => {
 
                   this.domElement = domElement;

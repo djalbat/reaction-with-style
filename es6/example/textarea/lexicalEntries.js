@@ -16,6 +16,7 @@ class LexicalEntriesTextarea extends Textarea {
     return (
 
       <textarea className={`${className} lexical-entries`}
+                spellCheck="false"
                 ref={(domElement) => {
 
                   this.domElement = domElement;

@@ -15,6 +15,7 @@ class ContentTextarea extends Textarea {
     return (
 
       <textarea className={`${className} content`}
+                spellCheck="false"
                 ref={(domElement) => {
 
                   this.domElement = domElement;

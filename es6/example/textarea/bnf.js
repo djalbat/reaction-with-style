@@ -15,6 +15,7 @@ class BNFTextarea extends Textarea {
     return (
 
       <textarea className={`${className} bnf`}
+                spellCheck="false"
                 ref={(domElement) => {
 
                   this.domElement = domElement;
