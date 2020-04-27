@@ -12,7 +12,7 @@ function withStyle(ClassOrFunction) {
   return function() {
     const args = [...arguments];  ///
 
-    let { className } = ClassOrFunction;
+    let { className = null } = ClassOrFunction;
 
     const superStyle = retrieveStyle(className);
 
