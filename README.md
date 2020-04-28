@@ -50,7 +50,7 @@ Not an example as such. It allows you to test out CSS against the built-in CSS l
 
 ## Creating primitive components with style
 
-All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
+All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can access these components, which are functional components under the hood, as follows:
 
 ```
 const Link = withStyle.a`
@@ -67,8 +67,7 @@ const Link = withStyle.a`
 
 Now you are free to use the `Link` component in the usual way.
 
-Note that expression interpolation is supported.
-For example, here colour and breakpoint variables have been used.
+Note that expression interpolation is supported. For example, here colour and breakpoint variables have been used.
 
 To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
