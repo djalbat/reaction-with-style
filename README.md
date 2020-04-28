@@ -50,7 +50,7 @@ Not an example as such. It allows you to test out CSS against the built-in CSS l
 
 ## Creating primitive components with style
 
-All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/reaction-with-style/blob/master/es6/tagNames.js) file. You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
+All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can access these components, which are simple functional components, by dereferencing the `withStyle()` function:
 
 ```
 const Link = withStyle.a`
