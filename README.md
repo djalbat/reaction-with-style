@@ -73,7 +73,7 @@ To learn more about template literals in general and expression interpolation in
 
 ## Creating functional components with style
 
-This can be done with the `withStyle()` function, which effectively acts as a higher order component:
+This can be done with the `withStyle()` function:
 
 ```
 const Header = (props) => {
