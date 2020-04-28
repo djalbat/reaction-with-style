@@ -230,12 +230,11 @@ Placeholder class names make the association of DOM elements in your browser's d
 ## An example of functional classes
 
 Components with style are great for working with styles that relate directly to a component's functionality as opposed to just its appearance.
-In the example below, the component can be programmatically displayed and hidden:
 
 ```
-class Component extends React.Component {}
+class Div extends React.Component {}
 
-Object.assign(Component, {
+Object.assign(Div, {
   mixins: [
     hide,
     display,
@@ -244,7 +243,7 @@ Object.assign(Component, {
   ]
 });
 
-export default withStyle(Component)`
+export default withStyle(Div)`
 
   .hidden {
 
@@ -275,6 +274,8 @@ function isDisplayed() {
   return displayed;
 }
 ```
+
+In the example above, for example, the component can be programmatically displayed and hidden.
 
 ## Compiling from source
 
