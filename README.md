@@ -50,7 +50,7 @@ Not an example as such. It allows you to test out CSS against the built-in CSS l
 
 ## Creating primitive components with style
 
-All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can access these components, which are functional components under the hood, as follows:
+All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can create these components, which are functional components under the hood, as follows:
 
 ```
 const Link = withStyle.a`
@@ -65,9 +65,7 @@ const Link = withStyle.a`
 `;
 ```
 
-Now you are free to use the `Link` component in the usual way.
-
-Note that expression interpolation is supported. For example, here colour and breakpoint variables have been used.
+Now you are free to use the `Link` component in the usual way. Note that expression interpolation is supported. For example, here colour and breakpoint variables have been used.
 
 To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
@@ -131,7 +129,7 @@ Again the requisite `className` property is recovered, this time from the `this.
 
 ## Extending the styles of components with style
 
-This is straightforward for all primitive, functional and class components:
+If all you want to do is to add further styles to a component, be it a primitive, functional or class component, simply wrap it in another `withStyle()` call:
 
 ```
 const HeaderLink = withStyle(Link)`
@@ -141,27 +139,11 @@ const HeaderLink = withStyle(Link)`
 `;
 ```
 
-```
-const MainHeader = withStyle(Header)`
-
-  ...
-
-`;
-```
-
-```
-const SubmitButton = withStyle(Button)`
-
-  ...
-
-`;
-```
-
-In each case both the original and new components with style will keep their own styles. The former will inherit all the styles of the latter in each case and can override them as necessary.
+In this case the `Link` component will keep its own styles whilst the `HeaderLink` component will both inherit those styles and of course possess its own.
 
 ## Components with style and composition
 
-Composing components with style obviously causes no problems in general, aside from one small caveat. If you set the `className` property of a component with style, then you will overwrite the class name that has been given to it automatically. In the case of all components with style, however, it is easy to recover the class name and incorporate it into your own:
+Composing components with style obviously causes no problems in general, aside from one small caveat. If you set the `className` property of a component with style, then you will overwrite the class name that has been given to it automatically. In the case of all functional and class components with style, however, it is easy to recover the class name and incorporate it into your own:
 
 ```
 const NavigationButton = (props) => {
@@ -214,11 +196,11 @@ class NavigationButton extends Button {
   }
 }
 ```
-Unfortunately you cannot quite have your cake and eat it, meaning that you cannot now use the `NavigationButton` component without its own style style, so to speak, because it's `render()` method now expects it. However, if you export it wrapped in the `withStyle()` higher order component, as shown, this can never occur.
+Unfortunately you cannot quite have your cake and eat it, meaning that you cannot now use the `NavigationButton` component without its own style, so to speak, because it's `render()` method now expects it. However, if you export it wrapped in a `withStyle()` call, as shown, this can never occur.
 
 ## Placeholder class names
 
-Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names. For example:
+Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore. For functional components the following pattern is recommended:
 
 ```
 const MainHeader = (props) => {
@@ -241,8 +223,9 @@ export default withStyle(MainHeader)`
 
 `;
 ```
+For class components the pattern is essentially the same, albeit to be found in the `render()` method.
 
-This makes the identification of HTML elements in your browser's developer tools with their corresponding components far easier. 
+Placeholder class names make the association of DOM elements in your browser's developer tools with their corresponding components far easier.
 
 ## An example of functional classes
 
