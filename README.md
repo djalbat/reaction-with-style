@@ -229,7 +229,7 @@ Placeholder class names make the association of DOM elements in your browser's d
 
 ## An example of functional classes
 
-Components with style are great for working with styles that relate directly to a component's functionality as opposed to just its appearance.
+Components with style are great for working with styles relating to a component's functionality as opposed to just its appearance.
 
 ```
 class Div extends React.Component {}
