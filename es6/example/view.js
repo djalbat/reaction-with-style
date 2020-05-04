@@ -13,8 +13,8 @@ import SubHeading from "./subHeading";
 import SizeableDiv from "./div/sizeable";
 import BNFTextarea from "./textarea/bnf";
 import ContentTextarea from "./textarea/content";
-import VerticalSplitter from "./verticalSplitter";
 import ParseTreeTextarea from "./textarea/parseTree";
+import VerticalSplitterDiv from "./div/splitter/vertical";
 import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 
 import { queryByReactComponent } from "../utilities/query";
@@ -59,16 +59,16 @@ export default class View extends Component {
           </SubHeading>
           <BNFTextarea onKeyUp={this.keyUpHandler} />
         </SizeableDiv>
-        <VerticalSplitter />
+        <VerticalSplitterDiv />
         <ColumnDiv>
-          <SubHeading>
-            Parse tree
-          </SubHeading>
-          <ParseTreeTextarea />
           <SubHeading>
             Content
           </SubHeading>
           <ContentTextarea onKeyUp={this.keyUpHandler} />
+          <SubHeading>
+            Parse tree
+          </SubHeading>
+          <ParseTreeTextarea />
         </ColumnDiv>
       </ColumnsDiv>
 

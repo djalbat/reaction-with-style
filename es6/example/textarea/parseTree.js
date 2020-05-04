@@ -1,17 +1,16 @@
 "use strict";
 
-import withStyle from "../../index";  ///
-
 import Textarea from "../textarea";
 
-class ParseTreeTextarea extends Textarea {
+export default class ParseTreeTextarea extends Textarea {
   static mixins = [
     setParseTree,
     clearParseTree
   ];
 
   render(update) {
-    const { className, children } = this.props;
+    const { className } = Textarea,
+          { children } = this.props;
 
     return (
 
@@ -30,12 +29,6 @@ class ParseTreeTextarea extends Textarea {
     );
   }
 }
-
-export default withStyle(ParseTreeTextarea)`
-
-  margin-bottom: 1rem;
-
-`;
 
 function setParseTree(parseTree) {
   if (parseTree !== null) {

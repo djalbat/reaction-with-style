@@ -26,15 +26,13 @@ class Textarea extends Component {
 
 export default withStyle(Textarea)`
 
-  width: 100%;
-  font-size: 1rem;
-  padding: 0.25rem;
-  font-family: monospace;
-  border: 1px solid darkgray;
-  height: 16rem;
+  border: 1px solid darkgrey;
+  height: 24rem;
   resize: vertical;
+  padding: 0.25rem;
+  font-size: 1.2rem;
   white-space: pre;
-  margin-top: 0.5rem;
+  font-family: monospace;
 
 `;
 

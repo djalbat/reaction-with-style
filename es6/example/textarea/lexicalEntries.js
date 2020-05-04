@@ -1,17 +1,16 @@
 "use strict";
 
-import withStyle from "../../index";  ///
-
 import Textarea from "../textarea";
 
-class LexicalEntriesTextarea extends Textarea {
+export default class LexicalEntriesTextarea extends Textarea {
   static mixins = [
     getLexicalEntries,
     setLexicalEntries
   ];
 
   render(update) {
-    const { className, children } = this.props;
+    const { className } = Textarea,
+          { children } = this.props;
 
     return (
 
@@ -29,13 +28,6 @@ class LexicalEntriesTextarea extends Textarea {
     );
   }
 }
-
-export default withStyle(LexicalEntriesTextarea)`
-
-  overflow-wrap: normal;
-  margin-bottom: 1rem;
-
-`;
 
 function getLexicalEntries() {
   const value = this.getValue(),

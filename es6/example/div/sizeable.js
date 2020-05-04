@@ -33,9 +33,13 @@ class SizeableDiv extends Component {
 
 export default withStyle(SizeableDiv)`
 
-  width: 50%;
+  display: flex;
+  
+  width: 48rem;
+  min-width: 24rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  flex-direction: column;
 
 `;
 

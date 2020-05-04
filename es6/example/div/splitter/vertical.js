@@ -1,16 +1,16 @@
 "use strict";
 
-import withStyle from "../index";  ///
+import withStyle from "../../../index";  ///
 
 import { React } from "reaction";
 
-import cursor from "./cursor";
+import cursor from "../../cursor";
 
-import { getPreviousSibling } from "../utilities/sibling";
+import { getPreviousSibling } from "../../../utilities/sibling";
 
 const { Component } = React;
 
-class VerticalSplitter extends Component {
+class VerticalSplitterDiv extends Component {
   static mixins = [
     mouseUpHandler,
     mouseMoveHandler,
@@ -56,10 +56,11 @@ class VerticalSplitter extends Component {
   }
 }
 
-export default withStyle(VerticalSplitter)`
+export default withStyle(VerticalSplitterDiv)`
 
-  width: 0.5rem;
+  width: 1rem;
   flex-shrink: 0;
+  
   background-color: lightgrey;
 
 `;
