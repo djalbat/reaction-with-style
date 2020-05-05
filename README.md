@@ -277,6 +277,23 @@ function isDisplayed() {
 
 In the example above, for example, the component can be programmatically displayed and hidden.
 
+## Additional styles
+
+There may be times when you need to add general styles to a page or target the children of DOM elements. In these cases you can make use of the `addStyles()` method thus:
+
+```
+import withStyle from 'easy-with-style';   ///
+
+const { addStyle } = withStyle;
+
+addStyle(
+
+  ...
+
+);
+```
+This will create a separate `style` DOM element and place your style in there.
+
 ## Compiling from source
 
 Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
