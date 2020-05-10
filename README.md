@@ -279,14 +279,14 @@ In the example above, for example, the component can be programmatically display
 
 ## Additional styles
 
-There may be times when you need to add general styles to a page or target the children of DOM elements. In these cases you can make use of the `addStyles()` method thus:
+There may be times when you need to add general styles to a page or target the children of DOM elements. In these cases you can make use of the `renderStyle()` method thus:
 
 ```
 import withStyle from 'easy-with-style';   ///
 
-const { addStyle } = withStyle;
+const { renderStyle } = withStyle;
 
-addStyle(
+renderStyle(
 
   ...
 

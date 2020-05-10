@@ -6,7 +6,7 @@ import { tagNames, stylesUtilities, classNameUtilities } from "with-style";
 import { isClass } from "./utilities/class";
 
 const { generateClassName } = classNameUtilities,
-      { addStyle, renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
+      { renderStyle, renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
 function withStyle(ClassOrFunction) {
   return function() {
@@ -51,7 +51,7 @@ function withStyle(ClassOrFunction) {
 }
 
 Object.assign(withStyle, {
-  addStyle,
+  renderStyle,
   renderStyles
 });
 
