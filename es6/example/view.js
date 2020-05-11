@@ -7,6 +7,7 @@ import { CSSLexer, CSSParser } from "with-style";
 const { Component } = React;
 
 import Heading from "./heading";
+import RowsDiv from "./div/rows";
 import ColumnDiv from "./div/column";
 import ColumnsDiv from "./div/columns";
 import SubHeading from "./subHeading";
@@ -50,25 +51,29 @@ export default class View extends Component {
       </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
-          <SubHeading>
-            Lexical entries
-          </SubHeading>
-          <LexicalEntriesTextarea onKeyUp={this.keyUpHandler} />
-          <SubHeading>
-            BNF
-          </SubHeading>
-          <BNFTextarea onKeyUp={this.keyUpHandler} />
+          <RowsDiv>
+            <SubHeading>
+              Lexical entries
+            </SubHeading>
+            <LexicalEntriesTextarea onKeyUp={this.keyUpHandler} />
+            <SubHeading>
+              BNF
+            </SubHeading>
+            <BNFTextarea onKeyUp={this.keyUpHandler} />
+          </RowsDiv>
         </SizeableDiv>
         <VerticalSplitterDiv />
         <ColumnDiv>
-          <SubHeading>
-            Content
-          </SubHeading>
-          <ContentTextarea onKeyUp={this.keyUpHandler} />
-          <SubHeading>
-            Parse tree
-          </SubHeading>
-          <ParseTreeTextarea />
+          <RowsDiv>
+            <SubHeading>
+              Content
+            </SubHeading>
+            <ContentTextarea onKeyUp={this.keyUpHandler} />
+            <SubHeading>
+              Parse tree
+            </SubHeading>
+            <ParseTreeTextarea />
+          </RowsDiv>
         </ColumnDiv>
       </ColumnsDiv>
 

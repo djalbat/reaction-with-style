@@ -2,24 +2,22 @@
 
 import withStyle from "../../index";  ///
 
-const ColumnDiv = (props) => {
+const RowsDiv = (props) => {
   const { className, children } = props;
 
   return (
 
-    <div className={`${className} column`}>
+    <div className={`${className} rows`}>
       {children}
     </div>
 
   );
 };
 
-export default withStyle(ColumnDiv)`
+export default withStyle(RowsDiv)`
 
   display: flex;
   flex-grow: 1;
-
-  padding-left: 1rem;
-  padding-right: 1rem;
+  flex-direction: column;
 
 `;
