@@ -298,7 +298,7 @@ renderStyle(
 ```
 This will create a separate `style` DOM element and place your style in there.
 
-## Compiling from source
+## Building
 
 Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
 
