@@ -18,6 +18,8 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
     npm install
 
+You will need to do this if you want to look at the example.
+
 ## Usage
 
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it. Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself.
