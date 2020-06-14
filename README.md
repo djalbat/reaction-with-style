@@ -48,7 +48,7 @@ Note that rendering the styles in this way is not done as part of the build proc
 
 ## Example
 
-Not an example as such. It allows you to test out CSS against the built-in CSS lexer and parser. It is available from the `example.html` in the root of the repository.
+Not an example as such. It allows you to test out CSS against the built-in CSS lexer and parser. It is available from the `index.html` in the root of the repository.
 
 This is the first port of call should you suspect that your CSS is not being parsed correctly. Both the lexical entries and BNF that make up the CSS grammar can be altered on the fly.
 
@@ -304,6 +304,12 @@ Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have
 
     npm run build-debug
     npm run watch-debug
+
+You can also start a small development server:
+
+    npm start
+
+The example will then be available at http://localhost:8888/ and will reload automatically when changes are made.
 
 ## Contact
 
