@@ -8182,7 +8182,7 @@
               }
               return definitionsString1;
             }, ""), ruleName = this.name, ruleNameLength = ruleName.length, paddingLength = maximumRuleNameLength - ruleNameLength, padding = _string.paddingFromPaddingLength(paddingLength);
-            var semicolonString = multiLine ? "\\n\\n".concat(maximumPadding, "   ;") : " ;", string = "\\n\\n".concat(this.name).concat(padding, " ::= ").concat(definitionsString).concat(semicolonString);
+            var semicolonString = multiLine ? "\n\n".concat(maximumPadding, "   ;") : " ;", string = "\n\n".concat(this.name).concat(padding, " ::= ").concat(definitionsString).concat(semicolonString);
             return string;
           }
         }
@@ -19646,7 +19646,7 @@
       value: true
     });
     exports.default = void 0;
-    var bnf = '\n\n  expression  ::= expression_ operator expression expression~*\n\n                | expression_\n\n                ;\n\n  operator    ::= "+"\n\n                | "-"\n\n                | "/"\n\n                | "*"\n\n                ;\n\n  term        ::= /\\\\d+/ ;\n\n  expression_ ::= "(" expression ")"\n\n                | term\n\n                ;\n\n  expression~ ::= operator expression ;\n  \n';
+    var bnf = '\n\n  expression  ::= expression_ operator expression expression~*\n\n                | expression_\n\n                ;\n\n  operator    ::= "+"\n\n                | "-"\n\n                | "/"\n\n                | "*"\n\n                ;\n\n  term        ::= /\\d+/ ;\n\n  expression_ ::= "(" expression ")"\n\n                | term\n\n                ;\n\n  expression~ ::= operator expression ;\n  \n';
     var _default = bnf;
     exports.default = _default;
   });
