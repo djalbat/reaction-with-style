@@ -16,7 +16,7 @@ const bodyDOMElement = document.querySelector("body");
 
 ReactDOM.render(
 
-    <View />
+    <View/>
 
   ,
   bodyDOMElement

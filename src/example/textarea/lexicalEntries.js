@@ -2,6 +2,8 @@
 
 import Textarea from "../textarea";
 
+import { DOUBLE_SPACE } from "../constants";
+
 export default class LexicalEntriesTextarea extends Textarea {
   static mixins = [
     getLexicalEntries,
@@ -37,7 +39,7 @@ function getLexicalEntries() {
 }
 
 function setLexicalEntries(lexicalEntries) {
-  const value = JSON.stringify(lexicalEntries, null, "  ");
+  const value = JSON.stringify(lexicalEntries, null, DOUBLE_SPACE);
 
   this.setValue(value);
 }

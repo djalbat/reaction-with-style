@@ -4,6 +4,8 @@ import withStyle from "../../index";  ///
 
 import { React } from "reaction";
 
+import { WIDTH } from "../constants";
+
 const { Component } = React;
 
 class SizeableDiv extends Component {
@@ -53,5 +55,5 @@ function getWidth() {
 function setWidth(width) {
   width = `${width}px`; ///
 
-  this.setStyle("width", width);
+  this.setStyle(WIDTH, width);
 }

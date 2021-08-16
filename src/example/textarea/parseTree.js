@@ -2,6 +2,8 @@
 
 import Textarea from "../textarea";
 
+import { EMPTY_STRING } from "../constants";
+
 export default class ParseTreeTextarea extends Textarea {
   static mixins = [
     setParseTree,
@@ -44,7 +46,7 @@ function setParseTree(parseTree) {
 }
 
 function clearParseTree() {
-  const value = "";
+  const value = EMPTY_STRING;
 
   this.setValue(value);
 }

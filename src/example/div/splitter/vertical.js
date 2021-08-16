@@ -7,6 +7,7 @@ import { React } from "reaction";
 import cursor from "../../cursor";
 
 import { getPreviousSibling } from "../../../utilities/sibling";
+import { MOUSEUP_EVENT, MOUSEMOVE_EVENT } from "../../events";
 
 const { Component } = React;
 
@@ -28,15 +29,15 @@ class VerticalSplitterDiv extends Component {
 
     this.sizeableDiv = sizeableDiv;
 
-    window.addEventListener("mouseup", this.mouseUpHandler);
+    window.addEventListener(MOUSEUP_EVENT, this.mouseUpHandler);
 
-    window.addEventListener("mousemove", this.mouseMoveHandler);
+    window.addEventListener(MOUSEMOVE_EVENT, this.mouseMoveHandler);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("mousemove", this.mouseMoveHandler);
+    window.removeEventListener(MOUSEMOVE_EVENT, this.mouseMoveHandler);
 
-    window.removeEventListener("mouseup", this.mouseUpHandler);
+    window.removeEventListener(MOUSEUP_EVENT, this.mouseUpHandler);
 
     delete this.sizeableDiv;
   }
