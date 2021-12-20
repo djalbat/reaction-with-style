@@ -2,11 +2,19 @@
 
 import Textarea from "../textarea";
 
-class ContentTextarea extends Textarea {
-  static mixins = [
-    getContent,
-    setContent
-  ];
+export default class ContentTextarea extends Textarea {
+  getContent() {
+    const value = this.getValue(),
+          content = value;  ///
+
+    return content;
+  }
+
+  setContent(content) {
+    const value = content;  ///
+
+    this.setValue(value);
+  }
 
   render(update) {
     const { className } = Textarea,
@@ -14,32 +22,10 @@ class ContentTextarea extends Textarea {
 
     return (
 
-      <textarea className={`${className} content`}
-                spellCheck="false"
-                ref={(domElement) => {
-
-                  this.domElement = domElement;
-
-                }}
-      >
+      <textarea className={`${className} content`} spellCheck="false">
         {children}
       </textarea>
 
     );
   }
-}
-
-export default ContentTextarea;
-
-function getContent() {
-  const value = this.getValue(),
-        content = value;  ///
-
-  return content;
-}
-
-function setContent(content) {
-  const value = content;  ///
-
-  this.setValue(value);
 }

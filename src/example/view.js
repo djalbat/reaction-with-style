@@ -18,14 +18,40 @@ import ParseTreeTextarea from "./textarea/parseTree";
 import VerticalSplitterDiv from "./div/splitter/vertical";
 import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 
+import { EMPTY_STRING } from "./constants";
 import { queryByReactComponent } from "../utilities/query";
 
 export default class View extends Component {
-  static mixins = [
-    initialise,
-    keyUpHandler,
-    getParseTree
-  ];
+  keyUpHandler = () => {
+    try {
+      const parseTree = this.getParseTree();
+
+      this.parseTreeTextarea.setParseTree(parseTree);
+    } catch (error) {
+      console.log(error);
+
+      this.parseTreeTextarea.clearParseTree();
+    }
+  }
+
+  getParseTree() {
+    let parseTree = null;
+
+    const bnf = this.bnfTextarea.getBNF(),
+        content = this.contentTextarea.getContent(),
+        lexicalEntries = this.lexicalEntriesTextarea.getLexicalEntries(),
+        entries = lexicalEntries, ///
+        cssLexer = CSSLexer.fromEntries(entries),
+        cssParser = CSSParser.fromBNF(bnf),
+        tokens = cssLexer.tokenise(content),
+        node = cssParser.parse(tokens);
+
+    if (node !== null) {
+      parseTree = node.asParseTree(tokens);
+    }
+
+    return parseTree;
+  }
 
   componentDidMount() {
     this.bnfTextarea = queryByReactComponent(this, BNFTextarea);
@@ -41,6 +67,19 @@ export default class View extends Component {
     delete this.contentTextarea;
     delete this.parseTreeTextarea;
     delete this.lexicalEntriesTextarea;
+  }
+
+  initialise() {
+    const { entries } = CSSLexer,
+          { bnf } = CSSParser,
+          content = EMPTY_STRING, ///
+          lexicalEntries = entries; ///
+
+    this.bnfTextarea.setBNF(bnf);
+    this.contentTextarea.setContent(content);
+    this.lexicalEntriesTextarea.setLexicalEntries(lexicalEntries);
+
+    this.keyUpHandler();
   }
 
   render(update) {
@@ -78,49 +117,5 @@ export default class View extends Component {
       </ColumnsDiv>
 
     ]);
-  }
-}
-
-function initialise() {
-  const { entries } = CSSLexer,
-        { bnf } = CSSParser,
-        content = "", ///
-        lexicalEntries = entries; ///
-
-  this.bnfTextarea.setBNF(bnf);
-  this.contentTextarea.setContent(content);
-  this.lexicalEntriesTextarea.setLexicalEntries(lexicalEntries);
-
-  this.keyUpHandler();
-}
-
-function getParseTree() {
-  let parseTree = null;
-
-  const bnf = this.bnfTextarea.getBNF(),
-        content = this.contentTextarea.getContent(),
-        lexicalEntries = this.lexicalEntriesTextarea.getLexicalEntries(),
-        entries = lexicalEntries, ///
-        cssLexer = CSSLexer.fromEntries(entries),
-        cssParser = CSSParser.fromBNF(bnf),
-        tokens = cssLexer.tokenise(content),
-        node = cssParser.parse(tokens);
-
-  if (node !== null) {
-    parseTree = node.asParseTree(tokens);
-  }
-
-  return parseTree;
-}
-
-function keyUpHandler() {
-  try {
-    const parseTree = this.getParseTree();
-
-    this.parseTreeTextarea.setParseTree(parseTree);
-  } catch (error) {
-    console.log(error);
-
-    this.parseTreeTextarea.clearParseTree();
   }
 }

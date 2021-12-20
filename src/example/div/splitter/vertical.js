@@ -12,16 +12,69 @@ import { MOUSEUP_EVENT, MOUSEMOVE_EVENT } from "../../events";
 const { Component } = React;
 
 class VerticalSplitterDiv extends Component {
-  static mixins = [
-    mouseUpHandler,
-    mouseMoveHandler,
-    mouseDownHandler,
-    mouseOverHandler,
-    mouseOutHandler,
-    startDragging,
-    stopDragging,
-    isDragging
-  ];
+  mouseUpHandler = (event) => {
+    const dragging = this.isDragging();
+
+    if (dragging) {
+      this.stopDragging();
+    }
+
+    cursor.reset();
+  }
+
+  mouseMoveHandler = (event) => {
+    const dragging = this.isDragging();
+
+    if (dragging) {
+      const mouseLeft = event.pageX,  ///
+            relativeMouseLeft = mouseLeft - this.previousMouseLeft,
+            sizeableDivWidth = this.previousSizeableDivWidth + relativeMouseLeft,
+            width = sizeableDivWidth; ///
+
+      this.sizeableDiv.setWidth(width);
+    }
+  }
+
+  mouseDownHandler = (event) => {
+    const dragging = this.isDragging();
+
+    if (!dragging) {
+      const mouseLeft = event.pageX,  ///
+            sizeableDivWidth = this.sizeableDiv.getWidth(),
+            previousMouseLeft = mouseLeft,  ///
+            previousSizeableDivWidth = sizeableDivWidth;   ///
+
+      this.previousMouseLeft = previousMouseLeft;
+
+      this.previousSizeableDivWidth = previousSizeableDivWidth;
+
+      this.startDragging();
+    }
+
+    cursor.columnResize();
+  }
+
+  mouseOverHandler = (event) => {
+    cursor.columnResize();
+  }
+
+  mouseOutHandler = (event) => {
+    cursor.reset();
+  }
+
+  startDragging() {
+    this.addClass("dragging");
+  }
+
+  stopDragging() {
+    this.removeClass("dragging");
+  }
+
+  isDragging() {
+    const dragging = this.hasClass("dragging");
+
+    return dragging;
+  }
 
   componentDidMount() {
     const previousSibling = getPreviousSibling(this),
@@ -60,72 +113,7 @@ class VerticalSplitterDiv extends Component {
 export default withStyle(VerticalSplitterDiv)`
 
   width: 1rem;
-  flex-shrink: 0;
-  
+  flex-shrink: 0;  
   background-color: lightgrey;
 
 `;
-
-function mouseUpHandler() {
-  const dragging = this.isDragging();
-
-  if (dragging) {
-    this.stopDragging();
-  }
-
-  cursor.reset();
-}
-
-function mouseMoveHandler(event) {
-  const dragging = this.isDragging();
-
-  if (dragging) {
-    const mouseLeft = event.pageX,  ///
-          relativeMouseLeft = mouseLeft - this.previousMouseLeft,
-          sizeableDivWidth = this.previousSizeableDivWidth + relativeMouseLeft,
-          width = sizeableDivWidth; ///
-
-    this.sizeableDiv.setWidth(width);
-  }
-}
-
-function mouseDownHandler(event) {
-  const dragging = this.isDragging();
-
-  if (!dragging) {
-    const mouseLeft = event.pageX,  ///
-          sizeableDivWidth = this.sizeableDiv.getWidth(),
-          previousMouseLeft = mouseLeft,  ///
-          previousSizeableDivWidth = sizeableDivWidth;   ///
-
-    this.previousMouseLeft = previousMouseLeft;
-
-    this.previousSizeableDivWidth = previousSizeableDivWidth;
-
-    this.startDragging();
-  }
-
-  cursor.columnResize();
-}
-
-function mouseOverHandler() {
-  cursor.columnResize();
-}
-
-function mouseOutHandler() {
-  cursor.reset();
-}
-
-function startDragging() {
-  this.addClass("dragging");
-}
-
-function stopDragging() {
-  this.removeClass("dragging");
-}
-
-function isDragging() {
-  const dragging = this.hasClass("dragging");
-
-  return dragging;
-}

@@ -2,11 +2,19 @@
 
 import Textarea from "../textarea";
 
-class BNFTextarea extends Textarea {
-  static mixins = [
-    getBNF,
-    setBNF
-  ];
+export default class BNFTextarea extends Textarea {
+  getBNF() {
+    const value = this.getValue(),
+          bnf = value;  ///
+
+    return bnf;
+  }
+
+  setBNF(bnf) {
+    const value = bnf;  ///
+
+    this.setValue(value);
+  }
 
   render(update) {
     const { className } = Textarea,
@@ -14,32 +22,10 @@ class BNFTextarea extends Textarea {
 
     return (
 
-      <textarea className={`${className} bnf`}
-                spellCheck="false"
-                ref={(domElement) => {
-
-                  this.domElement = domElement;
-
-                }}
-      >
+      <textarea className={`${className} bnf`} spellCheck="false">
         {children}
       </textarea>
 
     );
   }
-}
-
-export default BNFTextarea;
-
-function getBNF() {
-  const value = this.getValue(),
-        bnf = value;  ///
-
-  return bnf;
-}
-
-function setBNF(bnf) {
-  const value = bnf;  ///
-
-  this.setValue(value);
 }

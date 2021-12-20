@@ -4,14 +4,35 @@ import withStyle from "../index";  ///
 
 import { React } from "reaction";
 
+import { KEYUP_EVENT } from "./events";
+
 const { Component } = React;
 
 class Textarea extends Component {
-  static mixins = [
-    onKeyUp,
-    setValue,
-    getValue
-  ];
+  onKeyUp = (keyUpHandler) => {
+    const firstChild = this.getFirstChild(),
+          firstChildDOMElement = firstChild.getDOMElement();
+
+    firstChildDOMElement.addEventListener(KEYUP_EVENT, (event) => {
+      keyUpHandler(event);
+    });
+  }
+
+  setValue(value) {
+    const firstChild = this.getFirstChild(),
+        firstChildDOMElement = firstChild.getDOMElement();
+
+    firstChildDOMElement.value = value;
+  }
+
+  getValue() {
+    const firstChild = this.getFirstChild(),
+        firstChildDOMElement = firstChild.getDOMElement();
+
+    const value = firstChildDOMElement.value;
+
+    return value;
+  }
 
   componentDidMount() {
     const { onKeyUp } = this.props;
@@ -21,6 +42,10 @@ class Textarea extends Component {
 
       this.onKeyUp(keyUpHandler);
     }
+  }
+
+  componentWillUnmount() {
+    ///
   }
 }
 
@@ -35,19 +60,3 @@ export default withStyle(Textarea)`
   font-family: monospace;
 
 `;
-
-function onKeyUp(keyUpHandler) {
-  this.domElement.addEventListener("keyup", (event) => {
-    keyUpHandler(event);
-  });
-}
-
-function setValue(value) {
-  this.domElement.value = value;
-}
-
-function getValue() {
-  const value = this.domElement.value;
-
-  return value;
-}

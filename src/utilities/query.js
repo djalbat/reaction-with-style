@@ -42,7 +42,7 @@ export function queryByReactFunction(element, ...reactFunctions) {
 export function queryByReactComponent(element, ...ReactComponents) {
   return query(element, (element) => {
     return ReactComponents.some((ReactComponent) => {
-      return (element.reactComponent instanceof ReactComponent);
+      return (element instanceof ReactComponent); ///
     });
   });
 }

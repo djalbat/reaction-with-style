@@ -5,10 +5,18 @@ import Textarea from "../textarea";
 import { DOUBLE_SPACE } from "../constants";
 
 export default class LexicalEntriesTextarea extends Textarea {
-  static mixins = [
-    getLexicalEntries,
-    setLexicalEntries
-  ];
+  getLexicalEntries() {
+    const value = this.getValue(),
+          lexicalEntries = JSON.parse(value);
+
+    return lexicalEntries;
+  }
+
+  setLexicalEntries(lexicalEntries) {
+    const value = JSON.stringify(lexicalEntries, null, DOUBLE_SPACE);
+
+    this.setValue(value);
+  }
 
   render(update) {
     const { className } = Textarea,
@@ -16,30 +24,10 @@ export default class LexicalEntriesTextarea extends Textarea {
 
     return (
 
-      <textarea className={`${className} lexical-entries`}
-                spellCheck="false"
-                ref={(domElement) => {
-
-                  this.domElement = domElement;
-
-                }}
-      >
+      <textarea className={`${className} lexical-entries`} spellCheck="false">
         {children}
       </textarea>
 
     );
   }
-}
-
-function getLexicalEntries() {
-  const value = this.getValue(),
-        lexicalEntries = JSON.parse(value);
-
-  return lexicalEntries;
-}
-
-function setLexicalEntries(lexicalEntries) {
-  const value = JSON.stringify(lexicalEntries, null, DOUBLE_SPACE);
-
-  this.setValue(value);
 }
