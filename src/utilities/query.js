@@ -1,10 +1,9 @@
 "use strict";
 
 export function queryByClass(element, Class, maximumDepth = Infinity) {
-  const test = (element) => (element instanceof Class),
-        depth = maximumDepth; ///
+  const depth = maximumDepth; ///
 
-  return query(element, depth, test);
+  return query(element, depth, (element) => (element instanceof Class));
 }
 
 function query(element, depth, test) {
