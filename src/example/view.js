@@ -19,7 +19,7 @@ import VerticalSplitterDiv from "./div/splitter/vertical";
 import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 
 import { EMPTY_STRING } from "./constants";
-import { queryByReactComponent } from "../utilities/query";
+import { queryByClass } from "../utilities/query";
 
 export default class View extends Component {
   keyUpHandler = () => {
@@ -54,10 +54,12 @@ export default class View extends Component {
   }
 
   componentDidMount() {
-    this.bnfTextarea = queryByReactComponent(this, BNFTextarea);
-    this.contentTextarea = queryByReactComponent(this, ContentTextarea);
-    this.parseTreeTextarea = queryByReactComponent(this, ParseTreeTextarea);
-    this.lexicalEntriesTextarea = queryByReactComponent(this, LexicalEntriesTextarea);
+    const maximumDepth = 7;
+
+    this.bnfTextarea = queryByClass(this, BNFTextarea, maximumDepth);
+    this.contentTextarea = queryByClass(this, ContentTextarea, maximumDepth);
+    this.parseTreeTextarea = queryByClass(this, ParseTreeTextarea, maximumDepth);
+    this.lexicalEntriesTextarea = queryByClass(this, LexicalEntriesTextarea, maximumDepth);
 
     this.initialise();
   }
