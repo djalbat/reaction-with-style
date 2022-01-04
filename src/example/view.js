@@ -1,12 +1,13 @@
 "use strict";
 
+import withStyle from "../index";  ///
+
 import { React } from "reaction";
 
 import { CSSLexer, CSSParser } from "with-style";
 
 const { Component } = React;
 
-import Heading from "./heading";
 import RowsDiv from "./div/rows";
 import ColumnDiv from "./div/column";
 import ColumnsDiv from "./div/columns";
@@ -21,7 +22,7 @@ import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 import { EMPTY_STRING } from "./constants";
 import { queryByClass } from "../utilities/query";
 
-export default class View extends Component {
+class View extends Component {
   keyUpHandler = () => {
     try {
       const parseTree = this.getParseTree();
@@ -54,7 +55,7 @@ export default class View extends Component {
   }
 
   componentDidMount() {
-    const maximumDepth = 7;
+    const maximumDepth = 9;
 
     this.bnfTextarea = queryByClass(this, BNFTextarea, maximumDepth);
     this.contentTextarea = queryByClass(this, ContentTextarea, maximumDepth);
@@ -85,39 +86,46 @@ export default class View extends Component {
   }
 
   render(update) {
+    const { className } = this.props;
+
     return ([
 
-      <Heading>
-        Reaction with Style example
-      </Heading>,
-      <ColumnsDiv>
-        <SizeableDiv>
-          <RowsDiv>
-            <SubHeading>
-              Lexical entries
-            </SubHeading>
-            <LexicalEntriesTextarea onKeyUp={this.keyUpHandler} />
-            <SubHeading>
-              BNF
-            </SubHeading>
-            <BNFTextarea onKeyUp={this.keyUpHandler} />
-          </RowsDiv>
-        </SizeableDiv>
-        <VerticalSplitterDiv/>
-        <ColumnDiv>
-          <RowsDiv>
-            <SubHeading>
-              Content
-            </SubHeading>
-            <ContentTextarea onKeyUp={this.keyUpHandler} />
-            <SubHeading>
-              Parse tree
-            </SubHeading>
-            <ParseTreeTextarea/>
-          </RowsDiv>
-        </ColumnDiv>
-      </ColumnsDiv>
+      <div className={`${className} view`}>
+        <ColumnsDiv>
+          <SizeableDiv>
+            <RowsDiv>
+              <SubHeading>
+                Lexical entries
+              </SubHeading>
+              <LexicalEntriesTextarea onKeyUp={this.keyUpHandler} />
+              <SubHeading>
+                BNF
+              </SubHeading>
+              <BNFTextarea onKeyUp={this.keyUpHandler} />
+            </RowsDiv>
+          </SizeableDiv>
+          <VerticalSplitterDiv/>
+          <ColumnDiv>
+            <RowsDiv>
+              <SubHeading>
+                Content
+              </SubHeading>
+              <ContentTextarea onKeyUp={this.keyUpHandler} />
+              <SubHeading>
+                Parse tree
+              </SubHeading>
+              <ParseTreeTextarea/>
+            </RowsDiv>
+          </ColumnDiv>
+        </ColumnsDiv>
+      </div>
 
     ]);
   }
 }
+
+export default withStyle(View)`
+
+  padding: 1rem;
+  
+`;
