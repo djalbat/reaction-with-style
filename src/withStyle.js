@@ -10,7 +10,7 @@ const { generateClassName } = classNameUtilities,
 
 function withStyle(ClassOrFunction) {
   return function() {
-    const args = [...arguments];  ///
+    const args = [ ...arguments ];  ///
 
     let { className = null } = ClassOrFunction;
 
