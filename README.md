@@ -50,9 +50,19 @@ Note that rendering the styles in this way is not done as part of the build proc
 
 ## Example
 
-Not an example as such. It allows you to test out CSS against the built-in CSS lexer and parser. It is available from the `index.html` in the root of the repository.
+There is a small development server that can be run from within the project's directory with the following command:
 
-This is the first port of call should you suspect that your CSS is not being parsed correctly. Both the lexical entries and BNF that make up the CSS grammar can be altered on the fly.
+    npm start
+
+The example will then be available at the following URL:
+
+http://localhost:8888
+
+The source for the example can be found in the `src/example.js` file and corresponding`src/example` folder. You are encouraged to try the example whilst reading what follows. You can rebuild it on the fly with the following command:
+
+    npm run watch-debug
+
+The development server will reload the page whenever you make changes.
 
 ## Creating primitive components with style
 
@@ -306,12 +316,6 @@ Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have
 
     npm run build-debug
     npm run watch-debug
-
-You can also start a small development server:
-
-    npm start
-
-The example will then be available at http://localhost:8888 and will reload automatically when changes are made.
 
 ## Contact
 
