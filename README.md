@@ -58,7 +58,7 @@ The example will then be available at the following URL:
 
 http://localhost:8888
 
-The source for the example can be found in the `src/example.js` file and corresponding`src/example` folder. You are encouraged to try the example whilst reading what follows. You can rebuild it on the fly with the following command:
+The source for the example can be found in the `src/example.js` file and corresponding `src/example` folder. You are encouraged to try the example whilst reading what follows. You can rebuild it on the fly with the following command:
 
     npm run watch-debug
 
