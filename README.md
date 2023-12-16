@@ -20,6 +20,24 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 You can also run a development server, see the section on building later on.
 
+## Example
+
+There is a small development server that can be run from within the project's directory with the following command:
+
+    npm start
+
+The example will then be available at the following URL:
+
+http://localhost:8888
+
+The source for the example can be found in the `src/example.js` file and corresponding `src/example` folder. You are encouraged to try the example whilst reading what follows. You can rebuild it on the fly with the following command:
+
+    npm run watch-debug
+
+The development server will reload the page whenever you make changes.
+
+One last thing to bear in mind is that this package is included by way of a relative rather than a package import. If you are importing it into your own application, however, you should use the standard package import.
+
 ## Usage
 
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it. Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself.
@@ -47,22 +65,6 @@ ReactDOM.render(
 ```
 
 Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before you call the `ReactDOM.render()` function.
-
-## Example
-
-There is a small development server that can be run from within the project's directory with the following command:
-
-    npm start
-
-The example will then be available at the following URL:
-
-http://localhost:8888
-
-The source for the example can be found in the `src/example.js` file and corresponding `src/example` folder. You are encouraged to try the example whilst reading what follows. You can rebuild it on the fly with the following command:
-
-    npm run watch-debug
-
-The development server will reload the page whenever you make changes.
 
 ## Creating primitive components with style
 
