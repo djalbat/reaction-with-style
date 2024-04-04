@@ -1,7 +1,7 @@
 {
   "name": "reaction-with-style",
   "author": "James Smith",
-  "version": "5.0.316",
+  "version": "5.0.317",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/reaction-with-style",
   "description": "Programmatic styles for Reaction.",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "reaction": "^4.0.51",
-    "with-style": "^5.0.199"
+    "with-style": "^5.0.200"
   },
   "devDependencies": {
     "@swc/core": "^1.2.50",
