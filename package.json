@@ -1,7 +1,7 @@
 {
   "name": "reaction-with-style",
   "author": "James Smith",
-  "version": "5.0.341",
+  "version": "5.0.342",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/reaction-with-style",
   "description": "Programmatic styles for Reaction.",
@@ -17,7 +17,7 @@
     "@swc/core": "^1.5.6",
     "esbuild": "^0.9.2",
     "express": "^4.17.1",
-    "lively-cli": "^2.0.52",
+    "lively-cli": "^2.0.65",
     "watchful-cli": "^1.7.44"
   },
   "scripts": {
