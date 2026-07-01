@@ -3,7 +3,7 @@
 export function queryByClass(element, Class, maximumDepth = Infinity) {
   const depth = maximumDepth; ///
 
-  return query(element, depth, (element) => (element instanceof Class));
+  return query(element, depth, (element) => (Class.prototype.isPrototypeOf(element)));
 }
 
 function query(element, depth, test) {

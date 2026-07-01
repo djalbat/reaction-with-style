@@ -3,9 +3,8 @@
 import { React } from "reaction";
 import { tagNames, stylesUtilities, classNameUtilities } from "with-style";
 
-import { isClass } from "./utilities/class";
-
-const { generateClassName } = classNameUtilities,
+const { Component } = React,
+      { generateClassName } = classNameUtilities,
       { renderStyle, renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
 
 function withStyle(ClassOrFunction) {
@@ -20,7 +19,7 @@ function withStyle(ClassOrFunction) {
 
     generateStyle(args, className, superStyle);
 
-    const ClassOrFunctionClass = isClass(ClassOrFunction);
+    const ClassOrFunctionClass = Component.isPrototypeOf(ClassOrFunction);  ///
 
     if (ClassOrFunctionClass) {
       const Class = ClassOrFunction;  ///
